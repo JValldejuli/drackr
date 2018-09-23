@@ -1,6 +1,7 @@
 package com.fiveguys.cs2340.drackr;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Editable;
@@ -77,12 +78,16 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void loginTapped() {
-        String loginMessage = String.format("Username: %s\nPassword: %s", emailField.getText().toString(), passwordField.getText().toString());
-        Context context = getApplicationContext();
-        int duration = Toast.LENGTH_SHORT;
-        Toast toast = Toast.makeText(context, loginMessage, duration);
-        toast.setGravity(Gravity.CENTER_HORIZONTAL | Gravity.CENTER_VERTICAL, 0, 0);
-        toast.show();
+        boolean emailIsValid = emailField.getText().toString().equals("user");
+        boolean passwordIsValid = passwordField.getText().toString().equals("pass");
+        if (emailIsValid && passwordIsValid) {
+            Intent intent = new Intent(this, DonationsActivity.class);
+            startActivity(intent);
+        } else {
+            Toast toast = Toast.makeText(getApplicationContext(), "Invalid credentials.", Toast.LENGTH_SHORT);
+            toast.setGravity(Gravity.CENTER_HORIZONTAL | Gravity.CENTER_VERTICAL, 0, 0);
+            toast.show();
+        }
     }
 
     private void refreshLoginEnabled() {
