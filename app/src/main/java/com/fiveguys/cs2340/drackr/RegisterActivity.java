@@ -73,15 +73,6 @@ public class RegisterActivity extends AppCompatActivity {
                 refreshRegisterEnabled();
             }
         });
-        passwordField.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (!registerButton.isEnabled()) {
-                    return;
-                }
-                registerButton.performClick();
-            }
-        });
 
         // User type spinner
         userTypeSpinner = (Spinner) findViewById(R.id.userTypeSpinner);
