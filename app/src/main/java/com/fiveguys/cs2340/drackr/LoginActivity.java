@@ -12,13 +12,17 @@ import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
+
+import org.w3c.dom.Text;
 
 public class LoginActivity extends AppCompatActivity {
 
     private EditText emailField;
     private EditText passwordField;
     private Button loginButton;
+    private TextView registerTextView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,8 +72,19 @@ public class LoginActivity extends AppCompatActivity {
         // Login button
         loginButton = (Button) findViewById(R.id.loginButton);
         loginButton.setOnClickListener(new View.OnClickListener() {
+            @Override
             public void onClick(View v) {
                 loginTapped();
+            }
+        });
+
+        // Register text view
+        registerTextView = (TextView) findViewById(R.id.registerTextView);
+        registerTextView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(LoginActivity.this, RegisterActivity.class);
+                startActivity(intent);
             }
         });
 
