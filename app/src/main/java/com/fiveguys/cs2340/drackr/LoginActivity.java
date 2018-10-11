@@ -93,9 +93,10 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void loginTapped() {
-        boolean emailIsValid = emailField.getText().toString().equals("user");
-        boolean passwordIsValid = passwordField.getText().toString().equals("pass");
-        if (emailIsValid && passwordIsValid) {
+        String email = emailField.getText().toString();
+        String password = passwordField.getText().toString();
+        Boolean signedIn = UserAuthenticator.signInWith(email, password);
+        if (signedIn) {
             Intent intent = new Intent(this, DonationsActivity.class);
             startActivity(intent);
         } else {
