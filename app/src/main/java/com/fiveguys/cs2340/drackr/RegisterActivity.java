@@ -106,6 +106,10 @@ public class RegisterActivity extends AppCompatActivity {
     }
 
     private void registerTapped() {
+        String name = nameField.getText().toString();
+        String email = emailField.getText().toString();
+        String password = passwordField.getText().toString();
+        UserAuthenticator.registerUserAccount(name, email, password);
         Intent intent = new Intent(this, DonationsActivity.class);
         startActivity(intent);
     }
