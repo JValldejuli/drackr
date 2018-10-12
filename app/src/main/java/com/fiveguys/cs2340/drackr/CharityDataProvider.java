@@ -9,10 +9,6 @@ import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
 
-import de.siegmar.fastcsv.reader.CsvReader;
-import de.siegmar.fastcsv.reader.CsvRow;
-import de.siegmar.fastcsv.reader.CsvParser;
-
 public class CharityDataProvider {
 
     private ArrayList<Charity> charities = new ArrayList<Charity>();
