@@ -24,14 +24,7 @@ public class CharityDataProvider {
 
             CharityType type = CharityType.charityType(charityData[8]);
 
-            URL url;
-            try {
-                url = new URL(charityData[10]);
-            } catch(Exception e) {
-                url = null;
-            }
-
-            Charity charity = new Charity(Integer.parseInt(charityData[0]),
+            Charity charity = new Charity(charityData[0],
                     charityData[1],
                     Double.parseDouble(charityData[2]),
                     Double.parseDouble(charityData[3]),
@@ -41,7 +34,7 @@ public class CharityDataProvider {
                     Integer.parseInt(charityData[7]),
                     type,
                     charityData[9],
-                    url);
+                    charityData[10]);
             charities.add(charity);
         }
 

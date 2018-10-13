@@ -15,7 +15,11 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.fiveguys.cs2340.drackr.dummy.DummyContent;
+
 import org.w3c.dom.Text;
+
+import java.io.InputStream;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -29,6 +33,10 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_login);
+
+        InputStream inputStream = getResources().openRawResource(R.raw.locationdata);
+        CharityDataProvider dataProvider = new CharityDataProvider(inputStream);
+        DummyContent.setup(dataProvider.getCharities());
 
         // Email field
         emailField = (EditText) findViewById(R.id.emailField);
