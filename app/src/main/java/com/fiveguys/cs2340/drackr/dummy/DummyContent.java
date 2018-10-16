@@ -19,18 +19,23 @@ public class DummyContent {
      * An array of sample (dummy) items.
      */
     public static final List<DummyItem> ITEMS = new ArrayList<DummyItem>();
+    /**
+     * A map of sample (dummy) items, by ID.
+     */
+    public static final Map<String, DummyItem> ITEM_MAP = new HashMap<String, DummyItem>();
 
     public static void setup(ArrayList<Charity> charities) {
+        removeAllItems();
         for (Charity charity: charities) {
             DummyItem d = new DummyItem(charity);
             addItem(d);
         }
     }
 
-    /**
-     * A map of sample (dummy) items, by ID.
-     */
-    public static final Map<String, DummyItem> ITEM_MAP = new HashMap<String, DummyItem>();
+    private static void removeAllItems() {
+        ITEMS.clear();
+        ITEM_MAP.clear();
+    }
 
     private static void addItem(DummyItem item) {
         ITEMS.add(item);
