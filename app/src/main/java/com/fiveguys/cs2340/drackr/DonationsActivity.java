@@ -3,6 +3,8 @@ package com.fiveguys.cs2340.drackr;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 
@@ -18,17 +20,24 @@ public class DonationsActivity extends AppCompatActivity implements CharityFragm
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_donations);
+    }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.bar_buttons, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
 
+    // handle button activities
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
 
-//        Button logoutButton = (Button) findViewById(R.id.logoutButton);
-//        logoutButton.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Intent intent = new Intent(DonationsActivity.this, LoginActivity.class);
-//                startActivity(intent);
-//            }
-//        });
+        if (id == R.id.mybutton) {
+            Intent intent = new Intent(DonationsActivity.this, LoginActivity.class);
+            startActivity(intent);
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     public void onListFragmentInteraction(DummyContent.DummyItem item) {
