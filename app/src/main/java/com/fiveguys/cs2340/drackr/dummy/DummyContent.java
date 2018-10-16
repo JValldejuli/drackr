@@ -19,42 +19,27 @@ public class DummyContent {
      * An array of sample (dummy) items.
      */
     public static final List<DummyItem> ITEMS = new ArrayList<DummyItem>();
-
-    public static ArrayList<Charity> charities = new ArrayList<Charity>();
+    /**
+     * A map of sample (dummy) items, by ID.
+     */
+    public static final Map<String, DummyItem> ITEM_MAP = new HashMap<String, DummyItem>();
 
     public static void setup(ArrayList<Charity> charities) {
+        removeAllItems();
         for (Charity charity: charities) {
             DummyItem d = new DummyItem(charity);
             addItem(d);
         }
     }
 
-    /**
-     * A map of sample (dummy) items, by ID.
-     */
-    public static final Map<String, DummyItem> ITEM_MAP = new HashMap<String, DummyItem>();
-
-    //private static final int COUNT = 6;
-    private static int getCount() {
-        return charities.size();
+    private static void removeAllItems() {
+        ITEMS.clear();
+        ITEM_MAP.clear();
     }
 
     private static void addItem(DummyItem item) {
         ITEMS.add(item);
         ITEM_MAP.put(item.id, item);
-    }
-
-    private static DummyItem createDummyItem(int position) {
-        return new DummyItem(charities.get(position));
-    }
-
-    private static String makeDetails(int position) {
-        StringBuilder builder = new StringBuilder();
-        builder.append("Details about Item: ").append(position);
-        for (int i = 0; i < position; i++) {
-            builder.append("\nMore details information here.");
-        }
-        return builder.toString();
     }
 
     /**
