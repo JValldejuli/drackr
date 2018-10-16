@@ -20,8 +20,6 @@ public class DummyContent {
      */
     public static final List<DummyItem> ITEMS = new ArrayList<DummyItem>();
 
-    public static ArrayList<Charity> charities = new ArrayList<Charity>();
-
     public static void setup(ArrayList<Charity> charities) {
         for (Charity charity: charities) {
             DummyItem d = new DummyItem(charity);
@@ -34,27 +32,9 @@ public class DummyContent {
      */
     public static final Map<String, DummyItem> ITEM_MAP = new HashMap<String, DummyItem>();
 
-    //private static final int COUNT = 6;
-    private static int getCount() {
-        return charities.size();
-    }
-
     private static void addItem(DummyItem item) {
         ITEMS.add(item);
         ITEM_MAP.put(item.id, item);
-    }
-
-    private static DummyItem createDummyItem(int position) {
-        return new DummyItem(charities.get(position));
-    }
-
-    private static String makeDetails(int position) {
-        StringBuilder builder = new StringBuilder();
-        builder.append("Details about Item: ").append(position);
-        for (int i = 0; i < position; i++) {
-            builder.append("\nMore details information here.");
-        }
-        return builder.toString();
     }
 
     /**
