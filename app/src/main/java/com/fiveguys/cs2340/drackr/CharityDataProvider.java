@@ -11,10 +11,14 @@ import java.util.List;
 
 public class CharityDataProvider {
 
-    private ArrayList<Charity> charities = new ArrayList<Charity>();
+    private static ArrayList<Charity> charities = new ArrayList<Charity>();
 
-    public CharityDataProvider(InputStream inputStream) {
-
+    private static boolean setup = false;
+    public static void setup(InputStream inputStream) {
+        if (setup) {
+            return;
+        }
+        setup = true;
         CSVFile csvFile = new CSVFile(inputStream);
         List charityDataObjects = csvFile.read();
         charityDataObjects.remove(0);
@@ -37,10 +41,11 @@ public class CharityDataProvider {
                     charityData[10]);
             charities.add(charity);
         }
-
     }
 
-    public ArrayList<Charity> getCharities() {
+    public static Charity selectedCharity = null;
+
+    public static ArrayList<Charity> getCharities() {
         return charities;
     }
 

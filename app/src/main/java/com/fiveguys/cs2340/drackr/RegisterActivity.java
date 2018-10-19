@@ -5,14 +5,12 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.view.Gravity;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.Toast;
 
 public class RegisterActivity extends AppCompatActivity {
 
@@ -110,7 +108,7 @@ public class RegisterActivity extends AppCompatActivity {
         String email = emailField.getText().toString();
         String password = passwordField.getText().toString();
         UserAuthenticator.registerUserAccount(name, email, password);
-        Intent intent = new Intent(this, DonationsActivity.class);
+        Intent intent = new Intent(this, CharitiesActivity.class);
         startActivity(intent);
     }
 
