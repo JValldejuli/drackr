@@ -1,23 +1,22 @@
 package com.fiveguys.cs2340.drackr;
 
 import android.content.Intent;
-import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 
-public class DonationsActivity extends AppCompatActivity implements ListSelectionDelegate {
+public class CharitiesActivity extends AppCompatActivity implements ListSelectionDelegate {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_donations);
+        setContentView(R.layout.activity_charities);
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.donations_buttons, menu);
+        getMenuInflater().inflate(R.menu.bar_buttons, menu);
         return super.onCreateOptionsMenu(menu);
     }
 
@@ -26,17 +25,17 @@ public class DonationsActivity extends AppCompatActivity implements ListSelectio
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
 
-        if (id == R.id.addDonationButton) {
-            Intent intent = new Intent(DonationsActivity.this, AddDonationActivity.class);
+        if (id == R.id.mybutton) {
+            Intent intent = new Intent(CharitiesActivity.this, LoginActivity.class);
             startActivity(intent);
         }
         return super.onOptionsItemSelected(item);
     }
 
     public void didSelect(Object item) {
-        Donation donation = (Donation) item;
-        Intent intent = new Intent(DonationsActivity.this, DonationDetailActivity.class);
-        intent.putExtra("donation", donation);
+        Charity charity = (Charity) item;
+        Intent intent = new Intent(CharitiesActivity.this, CharityDetailActivity.class);
+        CharityDataProvider.selectedCharity = charity;
         startActivity(intent);
     }
 

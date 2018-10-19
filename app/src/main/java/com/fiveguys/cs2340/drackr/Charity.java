@@ -4,6 +4,9 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 
 public class Charity implements Parcelable {
 
@@ -19,6 +22,21 @@ public class Charity implements Parcelable {
     private String phoneNumber;
     private String url;
 
+    @Override
+    public String toString() {
+        return name;
+    }
+
+    public ArrayList<Donation> getDonations() {
+        return donations;
+    }
+
+    public void setDonations(ArrayList<Donation> donations) {
+        this.donations = donations;
+    }
+
+    private ArrayList<Donation> donations;
+
     public Charity(String key, String name, double latitude, double longitude, String streetAddress, String city, String state, int zip, CharityType type, String phoneNumber, String url) {
         this.key = key;
         this.name = name;
@@ -31,6 +49,7 @@ public class Charity implements Parcelable {
         this.type = type;
         this.phoneNumber = phoneNumber;
         this.url = url;
+        this.donations = new ArrayList<Donation>();
     }
 
     protected Charity(Parcel in) {
@@ -45,6 +64,8 @@ public class Charity implements Parcelable {
         phoneNumber = in.readString();
         url = in.readString();
         type = (CharityType) in.readSerializable();
+        donations = new ArrayList<Donation>();
+        in.readTypedList(donations, Donation.CREATOR);
     }
 
     @Override
@@ -60,6 +81,7 @@ public class Charity implements Parcelable {
         dest.writeString(phoneNumber);
         dest.writeString(url);
         dest.writeSerializable(type);
+        dest.writeTypedList(donations);
     }
 
     @Override

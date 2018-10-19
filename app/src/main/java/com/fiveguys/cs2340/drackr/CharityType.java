@@ -4,7 +4,8 @@ public enum CharityType {
 
     DROP_OFF, STORE, WAREHOUSE;
 
-    public String getName() {
+    @Override
+    public String toString() {
         switch (this) {
             case DROP_OFF:
                 return "Drop Off";

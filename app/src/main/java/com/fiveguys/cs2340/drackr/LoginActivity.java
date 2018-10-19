@@ -1,23 +1,16 @@
 package com.fiveguys.cs2340.drackr;
 
-import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Editable;
-import android.text.Spannable;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import com.fiveguys.cs2340.drackr.dummy.DummyContent;
-
-import org.w3c.dom.Text;
 
 import java.io.InputStream;
 
@@ -35,8 +28,7 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
 
         InputStream inputStream = getResources().openRawResource(R.raw.locationdata);
-        CharityDataProvider dataProvider = new CharityDataProvider(inputStream);
-        DummyContent.setup(dataProvider.getCharities());
+        CharityDataProvider.setup(inputStream);
 
         // Email field
         emailField = (EditText) findViewById(R.id.emailField);
@@ -105,7 +97,7 @@ public class LoginActivity extends AppCompatActivity {
         String password = passwordField.getText().toString();
         Boolean signedIn = UserAuthenticator.signInWith(email, password);
         if (signedIn) {
-            Intent intent = new Intent(this, DonationsActivity.class);
+            Intent intent = new Intent(this, CharitiesActivity.class);
             startActivity(intent);
         } else {
             Toast toast = Toast.makeText(getApplicationContext(), "Invalid credentials.", Toast.LENGTH_SHORT);
