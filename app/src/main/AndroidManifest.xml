@@ -21,7 +21,8 @@
         <activity android:name=".CharityDetailActivity" />
         <activity android:name=".DonationsActivity" />
         <activity android:name=".DonationDetailActivity" />
-        <activity android:name=".AddDonationActivity"></activity>
+        <activity android:name=".AddDonationActivity" />
+        <activity android:name=".SearchActivity"></activity>
     </application>
 
 </manifest>
