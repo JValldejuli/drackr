@@ -21,6 +21,7 @@ public class Charity implements Parcelable {
     private CharityType type;
     private String phoneNumber;
     private String url;
+    private ArrayList<Donation> donations;
 
     @Override
     public String toString() {
@@ -35,9 +36,7 @@ public class Charity implements Parcelable {
         this.donations = donations;
     }
 
-    private ArrayList<Donation> donations;
-
-    public Charity(String key, String name, double latitude, double longitude, String streetAddress, String city, String state, int zip, CharityType type, String phoneNumber, String url) {
+    public Charity(String key, String name, double latitude, double longitude, String streetAddress, String city, String state, int zip, CharityType type, String phoneNumber, String url, ArrayList<Donation> donations) {
         this.key = key;
         this.name = name;
         this.latitude = latitude;
@@ -49,7 +48,7 @@ public class Charity implements Parcelable {
         this.type = type;
         this.phoneNumber = phoneNumber;
         this.url = url;
-        this.donations = new ArrayList<Donation>();
+        this.donations = donations;
     }
 
     protected Charity(Parcel in) {
