@@ -38,6 +38,16 @@ public class CharityDetailActivity extends AppCompatActivity {
                 + "\n"
                 + charity.getUrl().toString());
 
+        Button searchButton = (Button) findViewById(R.id.searchButton);
+        searchButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                DonationSearchCoordinator.specificCharity = CharityDataProvider.selectedCharity;
+                Intent searchIntent = new Intent(CharityDetailActivity.this, SearchActivity.class);
+                startActivity(searchIntent);
+            }
+        });
+
         Button donationsButton = (Button) findViewById(R.id.donationsButton);
         donationsButton.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -5,4 +5,9 @@
         android:title="LOGOUT"
         app:showAsAction="always"
         />
+    <item
+        android:id="@+id/searchButton"
+        android:title="SEARCH"
+        app:showAsAction="always"
+        />
 </menu>
