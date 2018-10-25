@@ -26,13 +26,12 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        SharedPreferences preferences = getPreferences(MODE_PRIVATE);
-        UserAuthenticator.initializeWith(preferences);
-
         setContentView(R.layout.activity_login);
 
+        SharedPreferences preferences = getPreferences(MODE_PRIVATE);
+        UserAuthenticator.initializeWith(preferences);
         InputStream inputStream = getResources().openRawResource(R.raw.locationdata);
-        CharityDataProvider.setup(inputStream);
+        CharityDataProvider.setup(preferences, inputStream);
 
         // Email field
         emailField = (EditText) findViewById(R.id.emailField);
