@@ -9,7 +9,7 @@ import java.util.ArrayList;
 
 public class UserAuthenticator {
 
-    private static ArrayList<UserAccount> accounts = new ArrayList<UserAccount>();;
+    private static ArrayList<UserAccount> accounts = new ArrayList<UserAccount>();
 
     private static UserAccount signedInUserAccount = null;
 
