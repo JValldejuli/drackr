@@ -13,6 +13,8 @@ public class UserAuthenticator {
 
     private static UserAccount signedInUserAccount = null;
 
+    private static Boolean loaded = false;
+
     private static SharedPreferences preferences;
 
     public static void initializeWith(SharedPreferences preferences) {
@@ -22,19 +24,22 @@ public class UserAuthenticator {
 
     private static void load() {
 
+        if (loaded) {
+            return;
+        }
+        loaded = true;
+
         Gson gson = new Gson();
 
         String accountsJSON = preferences.getString("accounts", "");
-        if (!accountsJSON.isEmpty()) {
-            ArrayList<LinkedTreeMap> linkedTreeMapList = gson.fromJson(accountsJSON, ArrayList.class);
-            for (LinkedTreeMap accountTreeMap : linkedTreeMapList) {
-                UserAccount account = new UserAccount(
-                        (String) accountTreeMap.get("name"),
-                        (String) accountTreeMap.get("email"),
-                        (String) accountTreeMap.get("password")
-                );
-                accounts.add(account);
-            }
+        ArrayList<LinkedTreeMap> linkedTreeMapList = gson.fromJson(accountsJSON, ArrayList.class);
+        for (LinkedTreeMap accountTreeMap : linkedTreeMapList) {
+            UserAccount account = new UserAccount(
+                    (String) accountTreeMap.get("name"),
+                    (String) accountTreeMap.get("email"),
+                    (String) accountTreeMap.get("password")
+            );
+            accounts.add(account);
         }
 
     }
