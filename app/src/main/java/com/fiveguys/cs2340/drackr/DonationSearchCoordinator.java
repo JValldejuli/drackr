@@ -6,7 +6,9 @@ public class DonationSearchCoordinator {
 
     public static ArrayList<Donation> results;
 
-    public static void searchDonationsByType(DonationType donationType, Charity specificCharity) {
+    public static Charity specificCharity;
+
+    public static void searchDonationsByType(DonationType donationType) {
 
         results.clear();
 
@@ -28,7 +30,7 @@ public class DonationSearchCoordinator {
 
     }
 
-    public static void searchDonationsByDescription(String donationDescription, Charity specificCharity) {
+    public static void searchDonationsByDescription(String donationDescription) {
 
         results.clear();
 

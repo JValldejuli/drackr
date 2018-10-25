@@ -42,6 +42,7 @@ public class CharityDetailActivity extends AppCompatActivity {
         searchButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                DonationSearchCoordinator.specificCharity = CharityDataProvider.selectedCharity;
 //                Intent intent = new Intent(CharityDetailActivity.this, DonationsActivity.class);
 //                startActivity(intent);
             }
