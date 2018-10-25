@@ -22,7 +22,8 @@
         <activity android:name=".DonationsActivity" />
         <activity android:name=".DonationDetailActivity" />
         <activity android:name=".AddDonationActivity" />
-        <activity android:name=".SearchActivity"></activity>
+        <activity android:name=".SearchActivity" />
+        <activity android:name=".SearchResultsActivity"></activity>
     </application>
 
 </manifest>
