@@ -1,5 +1,6 @@
 package com.fiveguys.cs2340.drackr;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -35,6 +36,8 @@ public class SearchActivity extends AppCompatActivity {
             public void onClick(View v) {
                 DonationType donationType = (DonationType) donationTypeSpinner.getSelectedItem();
                 DonationSearchCoordinator.searchDonationsByType(donationType);
+                Intent searchResultsIntent = new Intent(SearchActivity.this, SearchResultsActivity.class);
+                startActivity(searchResultsIntent);
             }
         });
 
@@ -43,6 +46,8 @@ public class SearchActivity extends AppCompatActivity {
             public void onClick(View v) {
                 String description = descriptionField.getText().toString();
                 DonationSearchCoordinator.searchDonationsByDescription(description);
+                Intent searchResultsIntent = new Intent(SearchActivity.this, SearchResultsActivity.class);
+                startActivity(searchResultsIntent);
             }
         });
 
