@@ -1,6 +1,7 @@
 package com.fiveguys.cs2340.drackr;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Editable;
@@ -27,8 +28,10 @@ public class LoginActivity extends AppCompatActivity {
 
         setContentView(R.layout.activity_login);
 
+        SharedPreferences preferences = getPreferences(MODE_PRIVATE);
+        UserAuthenticator.initializeWith(preferences);
         InputStream inputStream = getResources().openRawResource(R.raw.locationdata);
-        CharityDataProvider.setup(inputStream);
+        CharityDataProvider.setup(preferences, inputStream);
 
         // Email field
         emailField = (EditText) findViewById(R.id.emailField);

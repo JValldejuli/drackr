@@ -77,6 +77,7 @@ public class AddDonationActivity extends AppCompatActivity {
 
         Donation newDonation = new Donation(date, zipCode, description, amount, donationType);
         CharityDataProvider.selectedCharity.getDonations().add(newDonation);
+        CharityDataProvider.save();
 
         finish();
 
