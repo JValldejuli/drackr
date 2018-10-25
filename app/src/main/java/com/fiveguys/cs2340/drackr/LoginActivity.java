@@ -1,6 +1,7 @@
 package com.fiveguys.cs2340.drackr;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Editable;
@@ -24,6 +25,9 @@ public class LoginActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        SharedPreferences preferences = getPreferences(MODE_PRIVATE);
+        UserAuthenticator.initializeWith(preferences);
 
         setContentView(R.layout.activity_login);
 
