@@ -23,11 +23,13 @@ public class CharitiesActivity extends AppCompatActivity implements ListSelectio
     // handle button activities
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        int id = item.getItemId();
-
-        if (id == R.id.mybutton) {
-            Intent intent = new Intent(CharitiesActivity.this, LoginActivity.class);
-            startActivity(intent);
+        switch (item.getItemId()) {
+            case R.id.mybutton:
+                Intent intent = new Intent(CharitiesActivity.this, LoginActivity.class);
+                startActivity(intent);
+            case R.id.searchButton:
+//                Intent searchIntent = new Intent(CharitiesActivity.this, LoginActivity.class);
+//                startActivity(intent);
         }
         return super.onOptionsItemSelected(item);
     }
