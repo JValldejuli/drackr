@@ -43,8 +43,8 @@ public class CharityDetailActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 DonationSearchCoordinator.specificCharity = CharityDataProvider.selectedCharity;
-//                Intent intent = new Intent(CharityDetailActivity.this, DonationsActivity.class);
-//                startActivity(intent);
+                Intent searchIntent = new Intent(CharityDetailActivity.this, SearchActivity.class);
+                startActivity(searchIntent);
             }
         });
 
