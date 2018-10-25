@@ -23,4 +23,25 @@ public enum DonationType {
                 return "wat";
         }
     }
+
+    public static DonationType donationType(String string) {
+        switch (string) {
+            case "CLOTHING":
+                return CLOTHING;
+            case "HAT":
+                return HAT;
+            case "KITCHEN":
+                return KITCHEN;
+            case "ELECTRONICS":
+                return ELECTRONICS;
+            case "HOUSEHOLD":
+                return HOUSEHOLD;
+            case "OTHER":
+                return OTHER;
+            default:
+                return OTHER;
+        }
+    }
+
+
 }
