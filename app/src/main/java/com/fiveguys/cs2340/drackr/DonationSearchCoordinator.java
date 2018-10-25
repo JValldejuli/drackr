@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public class DonationSearchCoordinator {
 
-    public static ArrayList<Donation> results;
+    public static ArrayList<Donation> results = new ArrayList<Donation>();
 
     public static Charity specificCharity;
 

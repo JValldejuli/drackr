@@ -20,7 +20,7 @@ public class SearchActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search);
 
-        donationTypeSpinner = (Spinner) findViewById(R.id.donationTypeSpinner);
+        donationTypeSpinner = (Spinner) findViewById(R.id.typeSpinner);
         searchTypeButton = (Button) findViewById(R.id.searchTypeButton);
         descriptionField = (EditText) findViewById(R.id.descriptionField);
         searchDescriptionButton = (Button) findViewById(R.id.searchDescriptionButton);
