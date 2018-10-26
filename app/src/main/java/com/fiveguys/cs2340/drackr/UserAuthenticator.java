@@ -32,14 +32,16 @@ public class UserAuthenticator {
         Gson gson = new Gson();
 
         String accountsJSON = preferences.getString("accounts", "");
-        ArrayList<LinkedTreeMap> linkedTreeMapList = gson.fromJson(accountsJSON, ArrayList.class);
-        for (LinkedTreeMap accountTreeMap : linkedTreeMapList) {
-            UserAccount account = new UserAccount(
-                    (String) accountTreeMap.get("name"),
-                    (String) accountTreeMap.get("email"),
-                    (String) accountTreeMap.get("password")
-            );
-            accounts.add(account);
+        if (!(accountsJSON.equals("[]") || accountsJSON.isEmpty())) {
+            ArrayList<LinkedTreeMap> linkedTreeMapList = gson.fromJson(accountsJSON, ArrayList.class);
+            for (LinkedTreeMap accountTreeMap : linkedTreeMapList) {
+                UserAccount account = new UserAccount(
+                        (String) accountTreeMap.get("name"),
+                        (String) accountTreeMap.get("email"),
+                        (String) accountTreeMap.get("password")
+                );
+                accounts.add(account);
+            }
         }
 
     }

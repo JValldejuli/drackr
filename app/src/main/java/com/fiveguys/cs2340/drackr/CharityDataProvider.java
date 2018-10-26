@@ -40,7 +40,7 @@ public class CharityDataProvider {
         Gson gson = new Gson();
 
         String charitiesJSON = preferences.getString("charities", "");
-        if (!charitiesJSON.equals("[]")) {
+        if (!(charitiesJSON.equals("[]") || charitiesJSON.isEmpty())) {
             ArrayList<LinkedTreeMap> linkedTreeMapList = gson.fromJson(charitiesJSON, ArrayList.class);
             for (LinkedTreeMap charityTreeMap : linkedTreeMapList) {
 
