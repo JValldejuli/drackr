@@ -31,6 +31,8 @@ public class CharitiesActivity extends AppCompatActivity implements ListSelectio
                 DonationSearchCoordinator.specificCharity = null;
                 Intent searchIntent = new Intent(CharitiesActivity.this, SearchActivity.class);
                 startActivity(searchIntent);
+            case R.id.mapButton:
+                break;
         }
         return super.onOptionsItemSelected(item);
     }
