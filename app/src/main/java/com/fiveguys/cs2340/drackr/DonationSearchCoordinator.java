@@ -36,14 +36,14 @@ public class DonationSearchCoordinator {
 
         if (specificCharity != null) {
             for (Donation donation : specificCharity.getDonations()) {
-                if (donation.getDescription().equals(donationDescription)) {
+                if (donation.getDescription().contains(donationDescription)) {
                     results.add(donation);
                 }
             }
         } else {
             for (Charity charity : CharityDataProvider.getCharities()) {
                 for (Donation donation : charity.getDonations()) {
-                    if (donation.getDescription().equals(donationDescription)) {
+                    if (donation.getDescription().contains(donationDescription)) {
                         results.add(donation);
                     }
                 }
