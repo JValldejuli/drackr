@@ -58,6 +58,12 @@ public class UserAuthenticator {
     }
 
     public static void registerUserAccount(String name, String email, String password) {
+        boolean validName = name != null && !name.isEmpty();
+        boolean validEmail = email != null && !email.isEmpty();
+        boolean validPassword = password != null && !password.isEmpty();
+        if (!validName || !validEmail || !validPassword) {
+            return;
+        }
         UserAccount newAccount = new UserAccount(name, email, password);
         accounts.add(newAccount);
         signedInUserAccount = newAccount;
@@ -65,6 +71,11 @@ public class UserAuthenticator {
     }
 
     public static Boolean signInWith(String email, final String password) {
+        boolean validEmail = email != null && !email.isEmpty();
+        boolean validPassword = password != null && !password.isEmpty();
+        if (!validEmail || !validPassword) {
+            return false;
+        }
         for (UserAccount potential : accounts) {
             boolean foundAccount = potential.getEmail().equals(email) && potential.getPassword().equals(password);
             if (foundAccount) {
