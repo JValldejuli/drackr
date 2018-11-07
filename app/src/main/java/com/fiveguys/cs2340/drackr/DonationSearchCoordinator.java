@@ -20,6 +20,10 @@ class DonationSearchCoordinator {
 
     public static void searchDonationsByType(DonationType donationType) {
 
+        if (donationType == null) {
+            return;
+        }
+
         results.clear();
 
         if (specificCharity != null) {
@@ -41,6 +45,10 @@ class DonationSearchCoordinator {
     }
 
     public static void searchDonationsByDescription(CharSequence donationDescription) {
+
+        if (donationDescription == null || donationDescription.length() == 0) {
+            return;
+        }
 
         results.clear();
 
