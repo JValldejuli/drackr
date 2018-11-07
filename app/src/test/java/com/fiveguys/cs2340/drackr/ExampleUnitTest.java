@@ -28,11 +28,22 @@ public class ExampleUnitTest {
     }
 
     @Test
-    public void testRegisterEmptyArgs() {
-        UserAccount signedInUserBefore = UserAuthenticator.getSignedInUserAccount();
-        UserAuthenticator.registerUserAccount("", "", "");
+    public void testSetSpecificCharity() {
+        Charity c = makeCharity();
+        DonationSearchCoordinator.setSpecificCharity(c);
+        assertEquals(c, DonationSearchCoordinator.getSpecificCharity());
+    }
+
+    @Test
+    public void testSignInWithValidArgs() {
+        UserAccount a = new UserAccount("j", "jj", "jjj");
+        UserAuthenticator.registerUserAccount("j", "jj", "jjj");
+        Boolean b = UserAuthenticator.signInWith("jj", "jjj");
         UserAccount signedInUserAfter = UserAuthenticator.getSignedInUserAccount();
-        assertEquals(signedInUserBefore, signedInUserAfter);
+        assertTrue(b);
+        assertEquals(a.getName(), signedInUserAfter.getName());
+        assertEquals(a.getEmail(), signedInUserAfter.getEmail());
+        assertEquals(a.getPassword(), signedInUserAfter.getPassword());
     }
 
     @Test
@@ -44,6 +55,27 @@ public class ExampleUnitTest {
         assertEquals(signedInUserAfter.getEmail(), a.getEmail());
         assertEquals(signedInUserAfter.getPassword(), a.getPassword());
     }
+
+    @Test
+    public void testSignInWithValidArgsSB() {
+        UserAccount a = new UserAccount("spongebob", "sb@gmail.com", "shellcity");
+        UserAuthenticator.registerUserAccount("spongebob", "sb@gmail.com", "shellcity");
+        Boolean b = UserAuthenticator.signInWith("sb@gmail.com", "shellcity");
+        UserAccount signedInUserAfter = UserAuthenticator.getSignedInUserAccount();
+        assertTrue(b);
+        assertEquals(a.getName(), signedInUserAfter.getName());
+        assertEquals(a.getEmail(), signedInUserAfter.getEmail());
+        assertEquals(a.getPassword(), signedInUserAfter.getPassword());
+    }
+
+    @Test
+    public void testRegisterEmptyArgs() {
+        UserAccount signedInUserBefore = UserAuthenticator.getSignedInUserAccount();
+        UserAuthenticator.registerUserAccount("", "", "");
+        UserAccount signedInUserAfter = UserAuthenticator.getSignedInUserAccount();
+        assertEquals(signedInUserBefore, signedInUserAfter);
+    }
+
 
     @Test
     public void testSignInWithNullArgs() {
@@ -63,17 +95,6 @@ public class ExampleUnitTest {
         assertEquals(signedInUserBefore, signedInUserAfter);
     }
 
-    @Test
-    public void testSignInWithValidArgs() {
-        UserAccount a = new UserAccount("j", "jj", "jjj");
-        UserAuthenticator.registerUserAccount("j", "jj", "jjj");
-        Boolean b = UserAuthenticator.signInWith("jj", "jjj");
-        UserAccount signedInUserAfter = UserAuthenticator.getSignedInUserAccount();
-        assertTrue(b);
-        assertEquals(a.getName(), signedInUserAfter.getName());
-        assertEquals(a.getEmail(), signedInUserAfter.getEmail());
-        assertEquals(a.getPassword(), signedInUserAfter.getPassword());
-    }
 
     private Charity makeCharity() {
         List<Donation> a = new ArrayList<Donation>();
@@ -82,12 +103,6 @@ public class ExampleUnitTest {
         return new Charity("", "", 1, 1, "", "", "", 0, CharityType.DROP_OFF, "", "", a);
     }
 
-    @Test
-    public void testSetSpecificCharity() {
-        Charity c = makeCharity();
-        DonationSearchCoordinator.setSpecificCharity(c);
-        assertEquals(c, DonationSearchCoordinator.getSpecificCharity());
-    }
 
     @Test
     public void testSpecificCharityDonationTypeSearch() {
