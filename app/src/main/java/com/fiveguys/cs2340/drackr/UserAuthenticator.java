@@ -50,6 +50,10 @@ class UserAuthenticator {
 
     private static void save() {
 
+        if (preferences == null) {
+            return;
+        }
+
         SharedPreferences.Editor editor = preferences.edit();
         Gson gson = new Gson();
 
