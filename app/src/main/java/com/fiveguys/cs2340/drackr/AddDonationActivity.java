@@ -10,33 +10,36 @@ import android.widget.Spinner;
 
 import java.util.Date;
 
+/**
+ * Controls the add donation interface.
+ */
 public class AddDonationActivity extends AppCompatActivity {
 
-    private Charity charity;
-
-    EditText dateField;
-    EditText zipCodeField;
-    EditText descriptionField;
-    EditText amountField;
-    Spinner donationTypeSpinner;
-    Button doneButton;
+    private EditText dateField;
+    private EditText zipCodeField;
+    private EditText descriptionField;
+    private EditText amountField;
+    private Spinner donationTypeSpinner;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_donation);
 
-        charity = CharityDataProvider.selectedCharity;
+        Charity charity = CharityDataProvider.getSelectedCharity();
 
-        dateField = (EditText) findViewById(R.id.dateField);
-        zipCodeField = (EditText) findViewById(R.id.zipCodeField);
-        descriptionField = (EditText) findViewById(R.id.descriptionField);
-        amountField = (EditText) findViewById(R.id.amountField);
-        donationTypeSpinner = (Spinner) findViewById(R.id.donationTypeSpinner);
-        doneButton = (Button) findViewById(R.id.doneButton);
+        dateField = findViewById(R.id.dateField);
+        zipCodeField = findViewById(R.id.zipCodeField);
+        descriptionField = findViewById(R.id.descriptionField);
+        amountField = findViewById(R.id.amountField);
+        donationTypeSpinner = findViewById(R.id.donationTypeSpinner);
+        Button doneButton = findViewById(R.id.doneButton);
 
         // Setup spinner
-        ArrayAdapter<DonationType> adapter = new ArrayAdapter(this,android.R.layout.simple_spinner_item, DonationType.values());
+        ArrayAdapter<DonationType> adapter = new ArrayAdapter<>(
+                this, android.R.layout.simple_spinner_item,
+                DonationType.values()
+        );
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         donationTypeSpinner.setAdapter(adapter);
 
@@ -55,7 +58,12 @@ public class AddDonationActivity extends AppCompatActivity {
         if (dateString.isEmpty()) {
             return;
         }
-        Date date = new Date(dateString);
+        Date date;
+        try {
+            date = java.text.DateFormat.getDateInstance().parse(dateString);
+        } catch(Exception e) {
+            throw new RuntimeException("Failed to parse date");
+        }
 
         String zipCode = zipCodeField.getText().toString();
         if (zipCode.isEmpty()) {
@@ -76,7 +84,7 @@ public class AddDonationActivity extends AppCompatActivity {
         DonationType donationType = (DonationType) donationTypeSpinner.getSelectedItem();
 
         Donation newDonation = new Donation(date, zipCode, description, amount, donationType);
-        CharityDataProvider.selectedCharity.getDonations().add(newDonation);
+        CharityDataProvider.addDonationToSelectedCharity(newDonation);
         CharityDataProvider.save();
 
         finish();

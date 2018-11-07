@@ -3,11 +3,15 @@ package com.fiveguys.cs2340.drackr;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-import java.net.URL;
+import com.google.android.gms.maps.model.LatLng;
+
 import java.util.ArrayList;
-import java.util.Date;
+import java.util.Collections;
 import java.util.List;
 
+/**
+ * Data structure to represent a charity.
+ */
 public class Charity implements Parcelable {
 
     private String key;
@@ -21,22 +25,20 @@ public class Charity implements Parcelable {
     private CharityType type;
     private String phoneNumber;
     private String url;
-    private ArrayList<Donation> donations;
+    private List<Donation> donations;
 
     @Override
     public String toString() {
         return name;
     }
 
-    public ArrayList<Donation> getDonations() {
-        return donations;
+    public List<Donation> getDonations() {
+        return Collections.unmodifiableList(donations);
     }
 
-    public void setDonations(ArrayList<Donation> donations) {
-        this.donations = donations;
-    }
-
-    public Charity(String key, String name, double latitude, double longitude, String streetAddress, String city, String state, int zip, CharityType type, String phoneNumber, String url, ArrayList<Donation> donations) {
+    public Charity(String key, String name, double latitude, double longitude, String streetAddress,
+                   String city, String state, int zip, CharityType type, String phoneNumber,
+                   String url, List<Donation> donations) {
         this.key = key;
         this.name = name;
         this.latitude = latitude;
@@ -51,7 +53,7 @@ public class Charity implements Parcelable {
         this.donations = donations;
     }
 
-    protected Charity(Parcel in) {
+    private Charity(Parcel in) {
         key = in.readString();
         name = in.readString();
         latitude = in.readDouble();
@@ -63,7 +65,7 @@ public class Charity implements Parcelable {
         phoneNumber = in.readString();
         url = in.readString();
         type = (CharityType) in.readSerializable();
-        donations = new ArrayList<Donation>();
+        donations = new ArrayList<>();
         in.readTypedList(donations, Donation.CREATOR);
     }
 
@@ -83,6 +85,42 @@ public class Charity implements Parcelable {
         dest.writeTypedList(donations);
     }
 
+    public CharSequence getFullDescription() {
+        CharityType type = getType();
+        String typeAsString = type.description();
+        return getKey()
+                + "\n"
+                + getName()
+                + "\n"
+                + getLatitude()
+                + "\n"
+                + getLongitude()
+                + "\n"
+                + getStreetAddress()
+                + "\n"
+                + getCity()
+                + "\n"
+                + getState()
+                + "\n"
+                + getZip()
+                + "\n"
+                + typeAsString
+                + "\n"
+                + getPhoneNumber()
+                + "\n"
+                + getUrl().toString();
+    }
+
+    public String getMapMarkerDescription() {
+        return getName()
+                + "\n"
+                + getPhoneNumber();
+    }
+
+    public LatLng getCoordinates() {
+        return new LatLng(getLatitude(), getLongitude());
+    }
+
     @Override
     public int describeContents() {
         return 0;
@@ -100,7 +138,7 @@ public class Charity implements Parcelable {
         }
     };
 
-    public String getKey() {
+    private String getKey() {
         return key;
     }
 
@@ -132,7 +170,7 @@ public class Charity implements Parcelable {
         this.longitude = longitude;
     }
 
-    public String getStreetAddress() {
+    private String getStreetAddress() {
         return streetAddress;
     }
 
@@ -140,7 +178,7 @@ public class Charity implements Parcelable {
         this.streetAddress = streetAddress;
     }
 
-    public String getCity() {
+    private String getCity() {
         return city;
     }
 
@@ -148,7 +186,7 @@ public class Charity implements Parcelable {
         this.city = city;
     }
 
-    public String getState() {
+    private String getState() {
         return state;
     }
 
@@ -156,7 +194,7 @@ public class Charity implements Parcelable {
         this.state = state;
     }
 
-    public int getZip() {
+    private int getZip() {
         return zip;
     }
 
@@ -164,7 +202,7 @@ public class Charity implements Parcelable {
         this.zip = zip;
     }
 
-    public CharityType getType() {
+    private CharityType getType() {
         return type;
     }
 
@@ -180,7 +218,7 @@ public class Charity implements Parcelable {
         this.phoneNumber = phoneNumber;
     }
 
-    public String getUrl() {
+    private CharSequence getUrl() {
         return url;
     }
 

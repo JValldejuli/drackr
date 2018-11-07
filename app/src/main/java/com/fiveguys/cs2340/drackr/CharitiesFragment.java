@@ -2,6 +2,7 @@ package com.fiveguys.cs2340.drackr;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -9,16 +10,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+/**
+ * A fragment that draws the list of charities in CharityDataProvider.getCharities().
+ */
 public class CharitiesFragment extends Fragment {
 
+    @Nullable
     private ListSelectionDelegate mListener;
-
-    /**
-     * Mandatory empty constructor for the fragment manager to instantiate the
-     * fragment (e.g. upon screen orientation changes).
-     */
-    public CharitiesFragment() {
-    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -30,7 +28,9 @@ public class CharitiesFragment extends Fragment {
             Context context = view.getContext();
             RecyclerView recyclerView = (RecyclerView) view;
             recyclerView.setLayoutManager(new LinearLayoutManager(context));
-            recyclerView.setAdapter(new BasicRecyclerViewAdapter(CharityDataProvider.getCharities(), mListener));
+            recyclerView.setAdapter(
+                    new BasicRecyclerViewAdapter(CharityDataProvider.getCharities(), mListener)
+            );
         }
         return view;
     }

@@ -9,25 +9,29 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 
+/**
+ * Controls the interface to search for a donation.
+ */
 public class SearchActivity extends AppCompatActivity {
 
-    Spinner donationTypeSpinner;
-    Button searchTypeButton;
-    EditText descriptionField;
-    Button searchDescriptionButton;
+    private Spinner donationTypeSpinner;
+    private EditText descriptionField;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search);
 
-        donationTypeSpinner = (Spinner) findViewById(R.id.typeSpinner);
-        searchTypeButton = (Button) findViewById(R.id.searchTypeButton);
-        descriptionField = (EditText) findViewById(R.id.descriptionField);
-        searchDescriptionButton = (Button) findViewById(R.id.searchDescriptionButton);
+        donationTypeSpinner = findViewById(R.id.typeSpinner);
+        Button searchTypeButton = findViewById(R.id.searchTypeButton);
+        descriptionField = findViewById(R.id.descriptionField);
+        Button searchDescriptionButton = findViewById(R.id.searchDescriptionButton);
 
         // Setup spinner
-        ArrayAdapter<DonationType> adapter = new ArrayAdapter(this,android.R.layout.simple_spinner_item, DonationType.values());
+        ArrayAdapter<DonationType> adapter = new ArrayAdapter<>(
+                this, android.R.layout.simple_spinner_item,
+                DonationType.values()
+        );
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         donationTypeSpinner.setAdapter(adapter);
 
@@ -36,7 +40,10 @@ public class SearchActivity extends AppCompatActivity {
             public void onClick(View v) {
                 DonationType donationType = (DonationType) donationTypeSpinner.getSelectedItem();
                 DonationSearchCoordinator.searchDonationsByType(donationType);
-                Intent searchResultsIntent = new Intent(SearchActivity.this, SearchResultsActivity.class);
+                Intent searchResultsIntent = new Intent(
+                        SearchActivity.this,
+                        SearchResultsActivity.class
+                );
                 startActivity(searchResultsIntent);
             }
         });
@@ -46,7 +53,10 @@ public class SearchActivity extends AppCompatActivity {
             public void onClick(View v) {
                 String description = descriptionField.getText().toString();
                 DonationSearchCoordinator.searchDonationsByDescription(description);
-                Intent searchResultsIntent = new Intent(SearchActivity.this, SearchResultsActivity.class);
+                Intent searchResultsIntent = new Intent(
+                        SearchActivity.this,
+                        SearchResultsActivity.class
+                );
                 startActivity(searchResultsIntent);
             }
         });

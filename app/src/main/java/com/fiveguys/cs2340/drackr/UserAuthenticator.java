@@ -6,12 +6,13 @@ import com.google.gson.Gson;
 import com.google.gson.internal.LinkedTreeMap;
 
 import java.util.ArrayList;
+import java.util.Collection;
 
-public class UserAuthenticator {
+class UserAuthenticator {
 
-    private static ArrayList<UserAccount> accounts = new ArrayList<UserAccount>();
+    private static final Collection<UserAccount> accounts = new ArrayList<>();
 
-    private static UserAccount signedInUserAccount = null;
+    private static UserAccount signedInUserAccount;
 
     private static Boolean loaded = false;
 
@@ -32,8 +33,9 @@ public class UserAuthenticator {
         Gson gson = new Gson();
 
         String accountsJSON = preferences.getString("accounts", "");
-        if (!(accountsJSON.equals("[]") || accountsJSON.isEmpty())) {
-            ArrayList<LinkedTreeMap> linkedTreeMapList = gson.fromJson(accountsJSON, ArrayList.class);
+        if (!("[]".equals(accountsJSON) || accountsJSON.isEmpty())) {
+            Iterable<LinkedTreeMap> linkedTreeMapList
+                    = gson.fromJson(accountsJSON, ArrayList.class);
             for (LinkedTreeMap accountTreeMap : linkedTreeMapList) {
                 UserAccount account = new UserAccount(
                         (String) accountTreeMap.get("name"),
@@ -77,7 +79,9 @@ public class UserAuthenticator {
             return false;
         }
         for (UserAccount potential : accounts) {
-            boolean foundAccount = potential.getEmail().equals(email) && potential.getPassword().equals(password);
+            boolean foundAccount
+                    = potential.getEmail().equals(email)
+                    && potential.getPassword().equals(password);
             if (foundAccount) {
                 signedInUserAccount = potential;
                 return true;

@@ -1,5 +1,8 @@
 package com.fiveguys.cs2340.drackr;
 
+/**
+ * The set of possible charity types.
+ */
 public enum CharityType {
 
     DROP_OFF, STORE, WAREHOUSE;
@@ -18,6 +21,19 @@ public enum CharityType {
         }
     }
 
+    /**
+     * Gives a description of the CharityType.
+     * @return Description of the CharityType.
+     */
+    public String description() {
+        return toString();
+    }
+
+    /**
+     * Used to convert a string to a CharityType.
+     * @param string The string to convert.
+     * @return The CharityType.
+     */
     public static CharityType charityType(String string) {
         switch (string) {
             case "Drop Off":

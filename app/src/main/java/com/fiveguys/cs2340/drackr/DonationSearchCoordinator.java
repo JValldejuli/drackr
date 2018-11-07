@@ -1,12 +1,22 @@
 package com.fiveguys.cs2340.drackr;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
-public class DonationSearchCoordinator {
+class DonationSearchCoordinator {
 
-    public static ArrayList<Donation> results = new ArrayList<Donation>();
+    private static final ArrayList<Donation> results = new ArrayList<>();
 
-    public static Charity specificCharity;
+    private static Charity specificCharity;
+
+    public static List<Donation> getResults() {
+        return Collections.unmodifiableList(results);
+    }
+
+    public static void setSpecificCharity(Charity charity) {
+        specificCharity = charity;
+    }
 
     public static void searchDonationsByType(DonationType donationType) {
 
@@ -30,7 +40,7 @@ public class DonationSearchCoordinator {
 
     }
 
-    public static void searchDonationsByDescription(String donationDescription) {
+    public static void searchDonationsByDescription(CharSequence donationDescription) {
 
         results.clear();
 

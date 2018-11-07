@@ -8,11 +8,20 @@ import android.widget.TextView;
 
 import java.util.List;
 
-public class BasicRecyclerViewAdapter extends RecyclerView.Adapter<BasicRecyclerViewAdapter.ViewHolder> {
+/**
+ * A RecyclerView.Adapter that's used to display a basic looking list of Java Objects.
+ */
+public class BasicRecyclerViewAdapter
+        extends RecyclerView.Adapter<BasicRecyclerViewAdapter.ViewHolder> {
 
     private final List<?> mValues;
     private final ListSelectionDelegate mListener;
 
+    /**
+     * Designated constructor. Takes a list of Java Objects and a listener for selection events.
+     * @param items The items to display.
+     * @param listener The listener to serve as delegate on item selection.
+     */
     public BasicRecyclerViewAdapter(List<?> items, ListSelectionDelegate listener) {
         mValues = items;
         mListener = listener;
@@ -49,16 +58,16 @@ public class BasicRecyclerViewAdapter extends RecyclerView.Adapter<BasicRecycler
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-        public final View mView;
-        public final TextView mIdView;
-        public final TextView mContentView;
-        public Object mItem;
+        final View mView;
+        final TextView mIdView;
+        final TextView mContentView;
+        Object mItem;
 
-        public ViewHolder(View view) {
+        ViewHolder(View view) {
             super(view);
             mView = view;
-            mIdView = (TextView) view.findViewById(R.id.item_number);
-            mContentView = (TextView) view.findViewById(R.id.content);
+            mIdView = view.findViewById(R.id.item_number);
+            mContentView = view.findViewById(R.id.content);
         }
 
         @Override

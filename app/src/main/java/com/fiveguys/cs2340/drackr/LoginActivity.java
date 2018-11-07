@@ -15,12 +15,14 @@ import android.widget.Toast;
 
 import java.io.InputStream;
 
+/**
+ * Responsible for controlling the logic interface.
+ */
 public class LoginActivity extends AppCompatActivity {
 
     private EditText emailField;
     private EditText passwordField;
     private Button loginButton;
-    private TextView registerTextView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,7 +36,7 @@ public class LoginActivity extends AppCompatActivity {
         CharityDataProvider.setup(preferences, inputStream);
 
         // Email field
-        emailField = (EditText) findViewById(R.id.emailField);
+        emailField = findViewById(R.id.emailField);
         emailField.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -49,7 +51,7 @@ public class LoginActivity extends AppCompatActivity {
         });
 
         // Password field
-        passwordField = (EditText) findViewById(R.id.passwordField);
+        passwordField = findViewById(R.id.passwordField);
         passwordField.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -73,7 +75,7 @@ public class LoginActivity extends AppCompatActivity {
         });
 
         // Login button
-        loginButton = (Button) findViewById(R.id.loginButton);
+        loginButton = findViewById(R.id.loginButton);
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -82,7 +84,7 @@ public class LoginActivity extends AppCompatActivity {
         });
 
         // Register text view
-        registerTextView = (TextView) findViewById(R.id.registerTextView);
+        TextView registerTextView = findViewById(R.id.registerTextView);
         registerTextView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -103,7 +105,11 @@ public class LoginActivity extends AppCompatActivity {
             Intent intent = new Intent(this, CharitiesActivity.class);
             startActivity(intent);
         } else {
-            Toast toast = Toast.makeText(getApplicationContext(), "Invalid credentials.", Toast.LENGTH_SHORT);
+            Toast toast = Toast.makeText(
+                    getApplicationContext(),
+                    "Invalid credentials.",
+                    Toast.LENGTH_SHORT
+            );
             toast.setGravity(Gravity.CENTER_HORIZONTAL | Gravity.CENTER_VERTICAL, 0, 0);
             toast.show();
         }
