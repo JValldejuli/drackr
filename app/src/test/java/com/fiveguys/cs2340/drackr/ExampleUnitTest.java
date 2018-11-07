@@ -18,7 +18,23 @@ public class ExampleUnitTest {
     public void addition_isCorrect() {
         assertEquals(4, 2 + 2);
     }
+    @Test
+    public void testSpecificCharityDonationTypeSearch() {
+        Charity c = makeCharity();
+        DonationSearchCoordinator.setSpecificCharity(c);
+        DonationSearchCoordinator.searchDonationsByType(DonationType.CLOTHING);
+        Donation result = DonationSearchCoordinator.getResults().get(0);
+        assertEquals(result, c.getDonations().get(0));
+    }
 
+    @Test
+    public void testSpecificCharityDescriptionSearch() {
+        Charity c = makeCharity();
+        DonationSearchCoordinator.setSpecificCharity(c);
+        DonationSearchCoordinator.searchDonationsByDescription("computer");
+        Donation result = DonationSearchCoordinator.getResults().get(0);
+        assertEquals(result, c.getDonations().get(1));
+    }
     @Test
     public void testRegisterNullArgs() {
         UserAccount signedInUserBefore = UserAuthenticator.getSignedInUserAccount();
@@ -89,22 +105,6 @@ public class ExampleUnitTest {
         assertEquals(c, DonationSearchCoordinator.getSpecificCharity());
     }
 
-    @Test
-    public void testSpecificCharityDonationTypeSearch() {
-        Charity c = makeCharity();
-        DonationSearchCoordinator.setSpecificCharity(c);
-        DonationSearchCoordinator.searchDonationsByType(DonationType.CLOTHING);
-        Donation result = DonationSearchCoordinator.getResults().get(0);
-        assertEquals(result, c.getDonations().get(0));
-    }
 
-    @Test
-    public void testSpecificCharityDescriptionSearch() {
-        Charity c = makeCharity();
-        DonationSearchCoordinator.setSpecificCharity(c);
-        DonationSearchCoordinator.searchDonationsByDescription("computer");
-        Donation result = DonationSearchCoordinator.getResults().get(0);
-        assertEquals(result, c.getDonations().get(1));
-    }
 
 }
