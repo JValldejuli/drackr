@@ -3,16 +3,16 @@
     <item
         android:id="@+id/mybutton"
         android:title="LOGOUT"
-        app:showAsAction="always"
+        app:showAsAction="ifRoom"
         />
     <item
         android:id="@+id/searchButton"
         android:title="SEARCH"
-        app:showAsAction="always"
+        app:showAsAction="ifRoom"
         />
     <item
         android:id="@+id/mapButton"
         android:title="MAP"
-        app:showAsAction="always"
+        app:showAsAction="ifRoom"
         />
 </menu>

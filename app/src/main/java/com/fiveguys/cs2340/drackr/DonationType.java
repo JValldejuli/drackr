@@ -1,5 +1,8 @@
 package com.fiveguys.cs2340.drackr;
 
+/**
+ * The set of possible donation types.
+ */
 public enum DonationType {
     CLOTHING, HAT, KITCHEN, ELECTRONICS,
     HOUSEHOLD, OTHER;
@@ -24,6 +27,11 @@ public enum DonationType {
         }
     }
 
+    /**
+     * Used to convert a string into a DonationType.
+     * @param string The string to convert.
+     * @return The resulting DonationType.
+     */
     public static DonationType donationType(String string) {
         switch (string) {
             case "CLOTHING":
