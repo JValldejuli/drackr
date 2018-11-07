@@ -33,12 +33,40 @@ public class ExampleUnitTest {
 
     @Test
     public void testRegisterValidArgs() {
-        UserAccount a = new UserAccount("s", "d", "f");r
+        UserAccount a = new UserAccount("s", "d", "f");
         UserAuthenticator.registerUserAccount("s", "d", "f");
         UserAccount signedInUserAfter = UserAuthenticator.getSignedInUserAccount();
         assertEquals(signedInUserAfter.getName(), a.getName());
         assertEquals(signedInUserAfter.getEmail(), a.getEmail());
         assertEquals(signedInUserAfter.getPassword(), a.getPassword());
+    }
+
+
+    @Test
+    public void testSignInWithNullArgs() {
+        UserAccount signedInUserBefore = UserAuthenticator.getSignedInUserAccount();
+        Boolean a = UserAuthenticator.signInWith(null, null);
+        UserAccount signedInUserAfter = UserAuthenticator.getSignedInUserAccount();
+        assertFalse(a);
+        assertEquals(signedInUserBefore, signedInUserAfter);
+    }
+
+    @Test
+    public void testSignInWithEmptyArgs() {
+        UserAccount signedInUserBefore = UserAuthenticator.getSignedInUserAccount();
+        Boolean a = UserAuthenticator.signInWith("", "");
+        UserAccount signedInUserAfter = UserAuthenticator.getSignedInUserAccount();
+        assertFalse(a);
+        assertEquals(signedInUserBefore, signedInUserAfter);
+    }
+
+    @Test
+    public void testSignInWithValidArgs() {
+        UserAccount a = new UserAccount("j", "jj", "jjj");
+        Boolean b = UserAuthenticator.signInWith("jj", "jjj");
+        UserAccount signedInUserAfter = UserAuthenticator.getSignedInUserAccount();
+        assertTrue(b);
+        assertEquals(a, signedInUserAfter);
     }
 
 }
