@@ -90,4 +90,8 @@ class UserAuthenticator {
         return false;
     }
 
+    public static UserAccount getSignedInUserAccount() {
+        return signedInUserAccount;
+    }
+
 }
