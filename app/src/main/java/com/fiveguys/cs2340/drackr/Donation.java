@@ -5,15 +5,19 @@ import android.os.Parcelable;
 
 import java.util.Date;
 
+/**
+ * Data structure to represent a donation.
+ */
 public class Donation implements Parcelable {
 
-    Date date;
-    String zipCode;
-    String description;
-    double amount;
-    DonationType type;
+    private Date date;
+    private String zipCode;
+    private String description;
+    private double amount;
+    private DonationType type;
 
-    public Donation(Date date, String zipCode, String description, double amount, DonationType type) {
+    public Donation(Date date, String zipCode, String description,
+                    double amount, DonationType type) {
         this.date = date;
         this.zipCode = zipCode;
         this.description = description;
@@ -21,7 +25,7 @@ public class Donation implements Parcelable {
         this.type = type;
     }
 
-    protected Donation(Parcel in) {
+    private Donation(Parcel in) {
         date = (Date) in.readSerializable();
         zipCode = in.readString();
         description = in.readString();
@@ -41,6 +45,20 @@ public class Donation implements Parcelable {
     @Override
     public String toString() {
         return zipCode + " " + description;
+    }
+
+    public CharSequence getFullDescription() {
+        return getDate()
+                + "\n"
+                + getZipCode()
+                + "\n"
+                + getDescription()
+                + "\n"
+                + getShortDescription()
+                + "\n"
+                + "$" + getAmount()
+                + "\n"
+                + getType();
     }
 
     @Override
@@ -100,8 +118,9 @@ public class Donation implements Parcelable {
         this.type = type;
     }
 
+    private static final int SHORT_DESCRIPTION_LENGTH = 40;
     public String getShortDescription() {
-        return description.substring(0, Math.min(description.length(), 40));
+        return description.substring(0, Math.min(description.length(), SHORT_DESCRIPTION_LENGTH));
     }
 
 }

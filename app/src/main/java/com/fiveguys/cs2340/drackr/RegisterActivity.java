@@ -12,14 +12,15 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+/**
+ * Responsible for controlling the register interface.
+ */
 public class RegisterActivity extends AppCompatActivity {
 
     private EditText nameField;
     private EditText emailField;
     private EditText passwordField;
-    private Spinner userTypeSpinner;
     private Button registerButton;
-    private TextView loginTextView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,7 +29,7 @@ public class RegisterActivity extends AppCompatActivity {
         setContentView(R.layout.activity_register);
 
         // Name field
-        nameField = (EditText) findViewById(R.id.nameField);
+        nameField = findViewById(R.id.nameField);
         nameField.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -43,7 +44,7 @@ public class RegisterActivity extends AppCompatActivity {
         });
 
         // Email field
-        emailField = (EditText) findViewById(R.id.emailField);
+        emailField = findViewById(R.id.emailField);
         emailField.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -58,7 +59,7 @@ public class RegisterActivity extends AppCompatActivity {
         });
 
         // Password field
-        passwordField = (EditText) findViewById(R.id.passwordField);
+        passwordField = findViewById(R.id.passwordField);
         passwordField.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -73,15 +74,18 @@ public class RegisterActivity extends AppCompatActivity {
         });
 
         // User type spinner
-        userTypeSpinner = (Spinner) findViewById(R.id.userTypeSpinner);
+        Spinner userTypeSpinner = findViewById(R.id.userTypeSpinner);
         String[] userTypes = {"User", "Location Employee", "Admin"};
-        ArrayAdapter<String> adapter = new ArrayAdapter(this,android.R.layout.simple_spinner_item, userTypes);
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(
+                this, android.R.layout.simple_spinner_item,
+                userTypes
+        );
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         userTypeSpinner.setAdapter(adapter);
         userTypeSpinner.setSelection(0);
 
         // Register button
-        registerButton = (Button) findViewById(R.id.registerButton);
+        registerButton = findViewById(R.id.registerButton);
         registerButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -90,7 +94,7 @@ public class RegisterActivity extends AppCompatActivity {
         });
 
         // Register text view
-        loginTextView = (TextView) findViewById(R.id.loginTextView);
+        TextView loginTextView = findViewById(R.id.loginTextView);
         loginTextView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

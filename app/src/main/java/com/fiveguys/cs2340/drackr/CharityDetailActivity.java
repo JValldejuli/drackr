@@ -7,48 +7,34 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+/**
+ * Responsible for controlling the charity detail interface.
+ */
 public class CharityDetailActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_charity_detail);
-        Charity charity = CharityDataProvider.selectedCharity;
+        Charity charity = CharityDataProvider.getSelectedCharity();
 
         TextView text = findViewById(R.id.textView);
-        text.setText(charity.getKey()
-                + "\n"
-                + charity.getName()
-                + "\n"
-                + charity.getLatitude()
-                + "\n"
-                + charity.getLongitude()
-                + "\n"
-                + charity.getStreetAddress()
-                + "\n"
-                + charity.getCity()
-                + "\n"
-                + charity.getState()
-                + "\n"
-                + charity.getZip()
-                + "\n"
-                + charity.getType().toString()
-                + "\n"
-                + charity.getPhoneNumber()
-                + "\n"
-                + charity.getUrl().toString());
+        CharSequence charityFullDescription = charity.getFullDescription();
+        text.setText(charityFullDescription);
 
-        Button searchButton = (Button) findViewById(R.id.searchButton);
+        Button searchButton = findViewById(R.id.searchButton);
         searchButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                DonationSearchCoordinator.specificCharity = CharityDataProvider.selectedCharity;
+                DonationSearchCoordinator.setSpecificCharity(
+                        CharityDataProvider.getSelectedCharity()
+                );
                 Intent searchIntent = new Intent(CharityDetailActivity.this, SearchActivity.class);
                 startActivity(searchIntent);
             }
         });
 
-        Button donationsButton = (Button) findViewById(R.id.donationsButton);
+        Button donationsButton = findViewById(R.id.donationsButton);
         donationsButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

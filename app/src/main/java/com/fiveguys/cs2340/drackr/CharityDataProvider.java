@@ -5,24 +5,20 @@ import android.content.SharedPreferences;
 import com.google.gson.Gson;
 import com.google.gson.internal.LinkedTreeMap;
 
-import java.io.File;
-import java.io.IOException;
 import java.io.InputStream;
-import java.lang.reflect.Array;
-import java.net.URL;
-import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
-public class CharityDataProvider {
+class CharityDataProvider {
 
-    private static ArrayList<Charity> charities = new ArrayList<Charity>();
+    private static final List<Charity> charities = new ArrayList<>();
 
     private static SharedPreferences preferences;
     private static InputStream inputStream;
 
-    private static boolean loaded = false;
+    private static boolean loaded;
 
     public static void setup(SharedPreferences preferences, InputStream inputStream) {
         CharityDataProvider.preferences = preferences;
@@ -40,16 +36,25 @@ public class CharityDataProvider {
         Gson gson = new Gson();
 
         String charitiesJSON = preferences.getString("charities", "");
-        if (!(charitiesJSON.equals("[]") || charitiesJSON.isEmpty())) {
-            ArrayList<LinkedTreeMap> linkedTreeMapList = gson.fromJson(charitiesJSON, ArrayList.class);
+        if (!("[]".equals(charitiesJSON) || charitiesJSON.isEmpty())) {
+            Iterable<LinkedTreeMap> linkedTreeMapList
+                    = gson.fromJson(charitiesJSON, ArrayList.class);
             for (LinkedTreeMap charityTreeMap : linkedTreeMapList) {
 
-                ArrayList<LinkedTreeMap> linkedTreeMapDonationsList = (ArrayList<LinkedTreeMap>) charityTreeMap.get("donations");
-                ArrayList<Donation> donations = new ArrayList<Donation>();
+                Iterable<LinkedTreeMap> linkedTreeMapDonationsList
+                        = (ArrayList<LinkedTreeMap>) charityTreeMap.get("donations");
+                ArrayList<Donation> donations = new ArrayList<>();
 
                 for (LinkedTreeMap donationTreeMap : linkedTreeMapDonationsList) {
+                    String dateString = (String) donationTreeMap.get("date");
+                    Date date;
+                    try {
+                        date = java.text.DateFormat.getDateInstance().parse(dateString);
+                    } catch(Exception e) {
+                        throw new RuntimeException("Failed to parse date");
+                    }
                     Donation donation = new Donation(
-                            new Date((String) donationTreeMap.get("date")),
+                            date,
                             (String) donationTreeMap.get("zipCode"),
                             (String) donationTreeMap.get("description"),
                             (Double) donationTreeMap.get("amount"),
@@ -117,10 +122,26 @@ public class CharityDataProvider {
         editor.commit();
     }
 
-    public static Charity selectedCharity = null;
+    private static Charity selectedCharity;
 
-    public static ArrayList<Charity> getCharities() {
-        return charities;
+    public static Charity getSelectedCharity() {
+        return selectedCharity;
+    }
+
+    public static void setSelectedCharity(Charity charity) {
+        selectedCharity = charity;
+    }
+
+    public static List<Charity> getCharities() {
+        return Collections.unmodifiableList(charities);
+    }
+
+    public static void addDonationToSelectedCharity(Donation donation) {
+        selectedCharity.getDonations().add(donation);
+    }
+
+    public static List<Donation> getSelectedCharityDonations() {
+        return selectedCharity.getDonations();
     }
 
 }

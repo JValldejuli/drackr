@@ -10,16 +10,19 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
-import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
+/**
+ * Controls the map of charities interface.
+ */
 public class CharitiesMapActivity extends FragmentActivity implements OnMapReadyCallback {
 
-    private GoogleMap mMap;
+    private static final float INITIAL_ZOOM_FACTOR = 12.0f;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,7 +31,7 @@ public class CharitiesMapActivity extends FragmentActivity implements OnMapReady
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
-        mapFragment.getMapAsync(this);
+        Objects.requireNonNull(mapFragment).getMapAsync(this);
     }
 
 
@@ -43,13 +46,20 @@ public class CharitiesMapActivity extends FragmentActivity implements OnMapReady
      */
     @Override
     public void onMapReady(GoogleMap googleMap) {
-        mMap = googleMap;
 
-        mMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
+        googleMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
             @Override
             public boolean onMarkerClick(Marker marker) {
-                Toast toast = Toast.makeText(getApplicationContext(), marker.getTitle(), Toast.LENGTH_SHORT);
-                toast.setGravity(Gravity.CENTER_HORIZONTAL | Gravity.CENTER_VERTICAL, 0, 0);
+                Toast toast = Toast.makeText(
+                        getApplicationContext(),
+                        marker.getTitle(),
+                        Toast.LENGTH_SHORT
+                );
+                toast.setGravity(
+                        Gravity.CENTER_HORIZONTAL | Gravity.CENTER_VERTICAL,
+                        0,
+                        0
+                );
                 toast.show();
                 return true;
             }
@@ -57,19 +67,31 @@ public class CharitiesMapActivity extends FragmentActivity implements OnMapReady
 
         List<Charity> charities = CharityDataProvider.getCharities();
 
-        ArrayList<MarkerOptions> charitiesMarkers = new ArrayList<MarkerOptions>();
+        List<MarkerOptions> charitiesMarkers = new ArrayList<>();
 
         for (Charity charity : charities) {
-            LatLng coordinate = new LatLng(charity.getLatitude(), charity.getLongitude());
             MarkerOptions markerOptions = new MarkerOptions();
-            MarkerOptions marker = markerOptions.position(coordinate).title(charity.getName() + "\n" + charity.getPhoneNumber()).icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED));
+
+            MarkerOptions marker = markerOptions.position(
+                    charity.getCoordinates()
+            ).title(
+                    charity.getMapMarkerDescription()
+            ).icon(
+                    BitmapDescriptorFactory.defaultMarker(
+                            BitmapDescriptorFactory.HUE_RED
+                    )
+            );
+
             charitiesMarkers.add(marker);
         }
 
         for (MarkerOptions marker : charitiesMarkers) {
-            mMap.addMarker(marker);
+            googleMap.addMarker(marker);
         }
-        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(charitiesMarkers.get(0).getPosition(), 12.0f));
+        googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(
+                charitiesMarkers.get(0).getPosition(),
+                INITIAL_ZOOM_FACTOR)
+        );
 
     }
 

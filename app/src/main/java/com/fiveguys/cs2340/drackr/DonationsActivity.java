@@ -1,12 +1,15 @@
 package com.fiveguys.cs2340.drackr;
 
 import android.content.Intent;
-import android.support.v4.app.Fragment;
+import android.os.Parcelable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 
+/**
+ * Responsible for controlling the Donations list interface.
+ */
 public class DonationsActivity extends AppCompatActivity implements ListSelectionDelegate {
 
     @Override
@@ -33,8 +36,9 @@ public class DonationsActivity extends AppCompatActivity implements ListSelectio
         return super.onOptionsItemSelected(item);
     }
 
+    @Override
     public void didSelect(Object item) {
-        Donation donation = (Donation) item;
+        Parcelable donation = (Donation) item;
         Intent intent = new Intent(DonationsActivity.this, DonationDetailActivity.class);
         intent.putExtra("donation", donation);
         startActivity(intent);

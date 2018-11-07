@@ -1,6 +1,6 @@
 package com.fiveguys.cs2340.drackr;
 
-public class UserAccount {
+class UserAccount {
 
     // MARK: Instance variables
     private String name;
