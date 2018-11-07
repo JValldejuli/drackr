@@ -17,6 +17,9 @@ class DonationSearchCoordinator {
     public static void setSpecificCharity(Charity charity) {
         specificCharity = charity;
     }
+    public static Charity getSpecificCharity() {
+        return specificCharity;
+    }
 
     public static void searchDonationsByType(DonationType donationType) {
 
