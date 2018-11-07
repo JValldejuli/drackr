@@ -45,6 +45,36 @@ public class ExampleUnitTest {
         assertEquals(signedInUserAfter.getPassword(), a.getPassword());
     }
 
+    @Test
+    public void testSignInWithNullArgs() {
+        UserAccount signedInUserBefore = UserAuthenticator.getSignedInUserAccount();
+        Boolean a = UserAuthenticator.signInWith(null, null);
+        UserAccount signedInUserAfter = UserAuthenticator.getSignedInUserAccount();
+        assertFalse(a);
+        assertEquals(signedInUserBefore, signedInUserAfter);
+    }
+
+    @Test
+    public void testSignInWithEmptyArgs() {
+        UserAccount signedInUserBefore = UserAuthenticator.getSignedInUserAccount();
+        Boolean a = UserAuthenticator.signInWith("", "");
+        UserAccount signedInUserAfter = UserAuthenticator.getSignedInUserAccount();
+        assertFalse(a);
+        assertEquals(signedInUserBefore, signedInUserAfter);
+    }
+
+    @Test
+    public void testSignInWithValidArgs() {
+        UserAccount a = new UserAccount("j", "jj", "jjj");
+        UserAuthenticator.registerUserAccount("j", "jj", "jjj");
+        Boolean b = UserAuthenticator.signInWith("jj", "jjj");
+        UserAccount signedInUserAfter = UserAuthenticator.getSignedInUserAccount();
+        assertTrue(b);
+        assertEquals(a.getName(), signedInUserAfter.getName());
+        assertEquals(a.getEmail(), signedInUserAfter.getEmail());
+        assertEquals(a.getPassword(), signedInUserAfter.getPassword());
+    }
+
     private Charity makeCharity() {
         List<Donation> a = new ArrayList<Donation>();
         a.add(new Donation(new Date(), "2", "shirt", 0, DonationType.CLOTHING));
