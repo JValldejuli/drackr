@@ -26,8 +26,6 @@ public class AddDonationActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_donation);
 
-        Charity charity = CharityDataProvider.getSelectedCharity();
-
         dateField = findViewById(R.id.dateField);
         zipCodeField = findViewById(R.id.zipCodeField);
         descriptionField = findViewById(R.id.descriptionField);
@@ -58,12 +56,7 @@ public class AddDonationActivity extends AppCompatActivity {
         if (dateString.isEmpty()) {
             return;
         }
-        Date date;
-        try {
-            date = java.text.DateFormat.getDateInstance().parse(dateString);
-        } catch(Exception e) {
-            throw new RuntimeException("Failed to parse date");
-        }
+        Date date = new Date(dateString);
 
         String zipCode = zipCodeField.getText().toString();
         if (zipCode.isEmpty()) {
@@ -84,8 +77,8 @@ public class AddDonationActivity extends AppCompatActivity {
         DonationType donationType = (DonationType) donationTypeSpinner.getSelectedItem();
 
         Donation newDonation = new Donation(date, zipCode, description, amount, donationType);
-        CharityDataProvider.addDonationToSelectedCharity(newDonation);
-        CharityDataProvider.save();
+        CharityDataProvider.shared.addDonationToSelectedCharity(newDonation);
+        CharityDataProvider.shared.save();
 
         finish();
 
