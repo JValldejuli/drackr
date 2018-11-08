@@ -111,7 +111,7 @@ public class RegisterActivity extends AppCompatActivity {
         String name = nameField.getText().toString();
         String email = emailField.getText().toString();
         String password = passwordField.getText().toString();
-        UserAuthenticator.registerUserAccount(name, email, password);
+        UserAuthenticator.shared.registerUserAccount(name, email, password);
         Intent intent = new Intent(this, CharitiesActivity.class);
         startActivity(intent);
     }

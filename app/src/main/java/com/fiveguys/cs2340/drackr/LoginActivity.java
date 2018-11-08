@@ -31,9 +31,9 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
 
         SharedPreferences preferences = getPreferences(MODE_PRIVATE);
-        UserAuthenticator.initializeWith(preferences);
+        UserAuthenticator.shared.initializeWith(preferences);
         InputStream inputStream = getResources().openRawResource(R.raw.locationdata);
-        CharityDataProvider.setup(preferences, inputStream);
+        CharityDataProvider.shared.setup(preferences, inputStream);
 
         // Email field
         emailField = findViewById(R.id.emailField);
@@ -100,7 +100,7 @@ public class LoginActivity extends AppCompatActivity {
     private void loginTapped() {
         String email = emailField.getText().toString();
         String password = passwordField.getText().toString();
-        Boolean signedIn = UserAuthenticator.signInWith(email, password);
+        Boolean signedIn = UserAuthenticator.shared.signInWith(email, password);
         if (signedIn) {
             Intent intent = new Intent(this, CharitiesActivity.class);
             startActivity(intent);

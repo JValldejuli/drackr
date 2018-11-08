@@ -13,20 +13,22 @@ import java.util.List;
 
 class CharityDataProvider {
 
-    private static final List<Charity> charities = new ArrayList<>();
+    public static final CharityDataProvider shared = new CharityDataProvider();
 
-    private static SharedPreferences preferences;
-    private static InputStream inputStream;
+    private final List<Charity> charities = new ArrayList<>();
 
-    private static boolean loaded;
+    private SharedPreferences preferences;
+    private InputStream inputStream;
 
-    public static void setup(SharedPreferences preferences, InputStream inputStream) {
-        CharityDataProvider.preferences = preferences;
-        CharityDataProvider.inputStream = inputStream;
+    private boolean loaded;
+
+    public void setup(SharedPreferences preferences, InputStream inputStream) {
+        this.preferences = preferences;
+        this.inputStream = inputStream;
         load();
     }
 
-    private static void load() {
+    private void load() {
 
         if (loaded) {
             return;
@@ -87,7 +89,7 @@ class CharityDataProvider {
 
     }
 
-    private static void loadFromCSV() {
+    private void loadFromCSV() {
         CSVFile csvFile = new CSVFile(inputStream);
         List charityDataObjects = csvFile.read();
         charityDataObjects.remove(0);
@@ -113,7 +115,7 @@ class CharityDataProvider {
         }
     }
 
-    public static void save() {
+    public void save() {
         SharedPreferences.Editor editor = preferences.edit();
         Gson gson = new Gson();
 
@@ -122,25 +124,25 @@ class CharityDataProvider {
         editor.apply();
     }
 
-    private static Charity selectedCharity;
+    private Charity selectedCharity;
 
-    public static Charity getSelectedCharity() {
+    public Charity getSelectedCharity() {
         return selectedCharity;
     }
 
-    public static void setSelectedCharity(Charity charity) {
+    public void setSelectedCharity(Charity charity) {
         selectedCharity = charity;
     }
 
-    public static List<Charity> getCharities() {
+    public List<Charity> getCharities() {
         return Collections.unmodifiableList(charities);
     }
 
-    public static void addDonationToSelectedCharity(Donation donation) {
+    public void addDonationToSelectedCharity(Donation donation) {
         selectedCharity.addDonation(donation);
     }
 
-    public static List<Donation> getSelectedCharityDonations() {
+    public List<Donation> getSelectedCharityDonations() {
         return selectedCharity.getDonations();
     }
 

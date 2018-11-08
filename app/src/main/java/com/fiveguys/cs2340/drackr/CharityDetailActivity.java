@@ -16,7 +16,7 @@ public class CharityDetailActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_charity_detail);
-        Charity charity = CharityDataProvider.getSelectedCharity();
+        Charity charity = CharityDataProvider.shared.getSelectedCharity();
 
         TextView text = findViewById(R.id.textView);
         CharSequence charityFullDescription = charity.getFullDescription();
@@ -26,8 +26,8 @@ public class CharityDetailActivity extends AppCompatActivity {
         searchButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                DonationSearchCoordinator.setSpecificCharity(
-                        CharityDataProvider.getSelectedCharity()
+                DonationSearchCoordinator.shared.setSpecificCharity(
+                        CharityDataProvider.shared.getSelectedCharity()
                 );
                 Intent searchIntent = new Intent(CharityDetailActivity.this, SearchActivity.class);
                 startActivity(searchIntent);

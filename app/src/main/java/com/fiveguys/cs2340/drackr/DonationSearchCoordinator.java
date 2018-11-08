@@ -6,22 +6,24 @@ import java.util.List;
 
 class DonationSearchCoordinator {
 
-    private static final List<Donation> results = new ArrayList<>();
+    public static final DonationSearchCoordinator shared = new DonationSearchCoordinator();
 
-    private static Charity specificCharity;
+    private final List<Donation> results = new ArrayList<>();
 
-    public static List<Donation> getResults() {
+    private Charity specificCharity;
+
+    public List<Donation> getResults() {
         return Collections.unmodifiableList(results);
     }
 
-    public static void setSpecificCharity(Charity charity) {
+    public void setSpecificCharity(Charity charity) {
         specificCharity = charity;
     }
-    public static Charity getSpecificCharity() {
+    public Charity getSpecificCharity() {
         return specificCharity;
     }
 
-    public static void searchDonationsByType(DonationType donationType) {
+    public void searchDonationsByType(DonationType donationType) {
 
         if (donationType == null) {
             return;
@@ -36,7 +38,7 @@ class DonationSearchCoordinator {
                 }
             }
         } else {
-            for (Charity charity : CharityDataProvider.getCharities()) {
+            for (Charity charity : CharityDataProvider.shared.getCharities()) {
                 for (Donation donation : charity.getDonations()) {
                     if (donation.getType().equals(donationType)) {
                         results.add(donation);
@@ -47,9 +49,9 @@ class DonationSearchCoordinator {
 
     }
 
-    public static void searchDonationsByDescription(CharSequence donationDescription) {
+    public void searchDonationsByDescription(CharSequence donationDescription) {
 
-        if (donationDescription == null || donationDescription.length() == 0) {
+        if ((donationDescription == null) || (donationDescription.length() == 0)) {
             return;
         }
 
@@ -62,7 +64,7 @@ class DonationSearchCoordinator {
                 }
             }
         } else {
-            for (Charity charity : CharityDataProvider.getCharities()) {
+            for (Charity charity : CharityDataProvider.shared.getCharities()) {
                 for (Donation donation : charity.getDonations()) {
                     if (donation.getDescription().contains(donationDescription)) {
                         results.add(donation);

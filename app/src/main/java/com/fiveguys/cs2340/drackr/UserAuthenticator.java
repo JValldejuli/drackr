@@ -10,20 +10,22 @@ import java.util.Collection;
 
 class UserAuthenticator {
 
-    private static final Collection<UserAccount> accounts = new ArrayList<>();
+    private final Collection<UserAccount> accounts = new ArrayList<>();
 
-    private static UserAccount signedInUserAccount;
+    private UserAccount signedInUserAccount;
 
-    private static Boolean loaded = false;
+    private Boolean loaded = false;
 
-    private static SharedPreferences preferences;
+    private SharedPreferences preferences;
 
-    public static void initializeWith(SharedPreferences preferences) {
-        UserAuthenticator.preferences = preferences;
+    public void initializeWith(SharedPreferences preferences) {
+        UserAuthenticator.shared.preferences = preferences;
         load();
     }
 
-    private static void load() {
+    public static final UserAuthenticator shared = new UserAuthenticator();
+
+    private void load() {
 
         if (loaded) {
             return;
@@ -48,7 +50,7 @@ class UserAuthenticator {
 
     }
 
-    private static void save() {
+    private void save() {
 
         if (preferences == null) {
             return;
@@ -63,10 +65,10 @@ class UserAuthenticator {
 
     }
 
-    public static void registerUserAccount(String name, String email, String password) {
-        boolean validName = name != null && !name.isEmpty();
-        boolean validEmail = email != null && !email.isEmpty();
-        boolean validPassword = password != null && !password.isEmpty();
+    public void registerUserAccount(String name, String email, String password) {
+        boolean validName = (name != null) && !name.isEmpty();
+        boolean validEmail = (email != null) && !email.isEmpty();
+        boolean validPassword = (password != null) && !password.isEmpty();
         if (!validName || !validEmail || !validPassword) {
             return;
         }
@@ -76,9 +78,9 @@ class UserAuthenticator {
         save();
     }
 
-    public static Boolean signInWith(String email, final String password) {
-        boolean validEmail = email != null && !email.isEmpty();
-        boolean validPassword = password != null && !password.isEmpty();
+    public Boolean signInWith(String email, final String password) {
+        boolean validEmail = (email != null) && !email.isEmpty();
+        boolean validPassword = (password != null) && !password.isEmpty();
         if (!validEmail || !validPassword) {
             return false;
         }
@@ -94,7 +96,7 @@ class UserAuthenticator {
         return false;
     }
 
-    public static UserAccount getSignedInUserAccount() {
+    public UserAccount getSignedInUserAccount() {
         return signedInUserAccount;
     }
 

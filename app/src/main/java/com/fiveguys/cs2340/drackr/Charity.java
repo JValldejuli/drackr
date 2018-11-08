@@ -25,7 +25,7 @@ public class Charity implements Parcelable {
     private CharityType type;
     private String phoneNumber;
     private String url;
-    private List<Donation> donations;
+    private final List<Donation> donations;
 
     @Override
     public String toString() {

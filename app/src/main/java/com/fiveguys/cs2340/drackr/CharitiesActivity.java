@@ -33,13 +33,13 @@ public class CharitiesActivity extends AppCompatActivity implements ListSelectio
                 startActivity(intent);
                 break;
             case R.id.searchButton:
-                DonationSearchCoordinator.setSpecificCharity(null);
+                DonationSearchCoordinator.shared.setSpecificCharity(null);
                 Intent searchIntent
                         = new Intent(CharitiesActivity.this, SearchActivity.class);
                 startActivity(searchIntent);
                 break;
             case R.id.mapButton:
-                DonationSearchCoordinator.setSpecificCharity(null);
+                DonationSearchCoordinator.shared.setSpecificCharity(null);
                 Intent charitiesMapIntent = new Intent(
                         CharitiesActivity.this,
                         CharitiesMapActivity.class
@@ -57,7 +57,7 @@ public class CharitiesActivity extends AppCompatActivity implements ListSelectio
                 CharitiesActivity.this,
                 CharityDetailActivity.class
         );
-        CharityDataProvider.setSelectedCharity(charity);
+        CharityDataProvider.shared.setSelectedCharity(charity);
         startActivity(intent);
     }
 

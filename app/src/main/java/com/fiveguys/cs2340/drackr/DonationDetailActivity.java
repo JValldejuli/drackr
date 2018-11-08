@@ -7,7 +7,7 @@ import android.widget.TextView;
 import java.util.Objects;
 
 /**
- * Controlls the DonationDetail interface.
+ * Controls the DonationDetail interface.
  */
 public class DonationDetailActivity extends AppCompatActivity {
 
@@ -19,7 +19,7 @@ public class DonationDetailActivity extends AppCompatActivity {
                 = (Donation) Objects.requireNonNull(getIntent().getExtras()).get("donation");
 
         TextView text = findViewById(R.id.textView);
-        text.setText(donation.getFullDescription());
+        text.setText(Objects.requireNonNull(donation).getFullDescription());
 
     }
 }

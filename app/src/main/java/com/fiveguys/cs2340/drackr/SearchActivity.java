@@ -39,7 +39,7 @@ public class SearchActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 DonationType donationType = (DonationType) donationTypeSpinner.getSelectedItem();
-                DonationSearchCoordinator.searchDonationsByType(donationType);
+                DonationSearchCoordinator.shared.searchDonationsByType(donationType);
                 Intent searchResultsIntent = new Intent(
                         SearchActivity.this,
                         SearchResultsActivity.class
@@ -52,7 +52,7 @@ public class SearchActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 String description = descriptionField.getText().toString();
-                DonationSearchCoordinator.searchDonationsByDescription(description);
+                DonationSearchCoordinator.shared.searchDonationsByDescription(description);
                 Intent searchResultsIntent = new Intent(
                         SearchActivity.this,
                         SearchResultsActivity.class

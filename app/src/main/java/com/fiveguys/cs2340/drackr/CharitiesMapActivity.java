@@ -65,7 +65,7 @@ public class CharitiesMapActivity extends FragmentActivity implements OnMapReady
             }
         });
 
-        List<Charity> charities = CharityDataProvider.getCharities();
+        List<Charity> charities = CharityDataProvider.shared.getCharities();
 
         List<MarkerOptions> charitiesMarkers = new ArrayList<>();
 
