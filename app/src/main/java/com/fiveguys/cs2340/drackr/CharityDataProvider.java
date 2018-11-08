@@ -137,11 +137,11 @@ class CharityDataProvider {
     }
 
     public static void addDonationToSelectedCharity(Donation donation) {
-        selectedCharity.getDonations().add(donation);
+        selectedCharity.addDonation(donation);
     }
 
     public static List<Donation> getSelectedCharityDonations() {
-        return selectedCharity.getDonations();
+        return getSelectedCharity().getDonations();
     }
 
 }

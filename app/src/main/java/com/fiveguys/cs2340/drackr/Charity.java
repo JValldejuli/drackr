@@ -36,6 +36,10 @@ public class Charity implements Parcelable {
         return Collections.unmodifiableList(donations);
     }
 
+    public void addDonation(Donation donation) {
+        donations.add(donation);
+    }
+
     public Charity(String key, String name, double latitude, double longitude, String streetAddress,
                    String city, String state, int zip, CharityType type, String phoneNumber,
                    String url, List<Donation> donations) {
