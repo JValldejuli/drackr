@@ -119,7 +119,7 @@ class CharityDataProvider {
 
         String charitiesJSON = gson.toJson(charities);
         editor.putString("charities", charitiesJSON);
-        editor.commit();
+        editor.apply();
     }
 
     private static Charity selectedCharity;
@@ -141,7 +141,7 @@ class CharityDataProvider {
     }
 
     public static List<Donation> getSelectedCharityDonations() {
-        return getSelectedCharity().getDonations();
+        return selectedCharity.getDonations();
     }
 
 }

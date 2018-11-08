@@ -59,7 +59,7 @@ class UserAuthenticator {
 
         String accountsJSON = gson.toJson(accounts);
         editor.putString("accounts", accountsJSON);
-        editor.commit();
+        editor.apply();
 
     }
 

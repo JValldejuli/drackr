@@ -6,7 +6,7 @@ import java.util.List;
 
 class DonationSearchCoordinator {
 
-    private static final ArrayList<Donation> results = new ArrayList<>();
+    private static final List<Donation> results = new ArrayList<>();
 
     private static Charity specificCharity;
 
