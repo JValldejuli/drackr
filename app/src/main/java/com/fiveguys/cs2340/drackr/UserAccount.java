@@ -6,11 +6,13 @@ class UserAccount {
     private String name;
     private String email;
     private String password;
+    private UserAccountType type;
 
-    public UserAccount(String name, String email, String password) {
+    public UserAccount(String name, String email, String password, UserAccountType type) {
         this.name = name;
         this.email = email;
         this.password = password;
+        this.type = type;
     }
 
     // MARK: Getters and setters
@@ -34,5 +36,8 @@ class UserAccount {
     public void setPassword(String password) {
         this.password = password;
     }
+
+    public UserAccountType getType() { return type; }
+    public void setType(UserAccountType type) { this.type = type; }
 
 }

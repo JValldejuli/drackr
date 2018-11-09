@@ -28,14 +28,14 @@ public enum UserAccountType {
      */
     public static UserAccountType userAccountType(String string) {
         switch (string) {
-            case "User":
+            case "USER":
                 return USER;
-            case "Location Employee":
+            case "LOCATION_EMPLOYEE":
                 return LOCATION_EMPLOYEE;
-            case "Admin":
+            case "ADMIN":
                 return ADMIN;
             default:
-                return USER;
+                throw new RuntimeException("Invalid string passed to userAccountType");
         }
     }
 }

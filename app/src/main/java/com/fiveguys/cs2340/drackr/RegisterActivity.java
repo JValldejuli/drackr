@@ -20,6 +20,7 @@ public class RegisterActivity extends AppCompatActivity {
     private EditText nameField;
     private EditText emailField;
     private EditText passwordField;
+    private Spinner userAccountTypeSpinner;
     private Button registerButton;
 
     @Override
@@ -74,15 +75,15 @@ public class RegisterActivity extends AppCompatActivity {
         });
 
         // User type spinner
-        Spinner userTypeSpinner = findViewById(R.id.userTypeSpinner);
-        String[] userTypes = {"User", "Location Employee", "Admin"};
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(
-                this, android.R.layout.simple_spinner_item,
-                userTypes
+        userAccountTypeSpinner = findViewById(R.id.userTypeSpinner);
+        ArrayAdapter<UserAccountType> adapter = new ArrayAdapter<>(
+                this,
+                android.R.layout.simple_spinner_item,
+                UserAccountType.values()
         );
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        userTypeSpinner.setAdapter(adapter);
-        userTypeSpinner.setSelection(0);
+        userAccountTypeSpinner.setAdapter(adapter);
+        userAccountTypeSpinner.setSelection(0);
 
         // Register button
         registerButton = findViewById(R.id.registerButton);
@@ -98,7 +99,10 @@ public class RegisterActivity extends AppCompatActivity {
         loginTextView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
+                Intent intent = new Intent(
+                        RegisterActivity.this,
+                        LoginActivity.class
+                );
                 startActivity(intent);
             }
         });
@@ -111,7 +115,9 @@ public class RegisterActivity extends AppCompatActivity {
         String name = nameField.getText().toString();
         String email = emailField.getText().toString();
         String password = passwordField.getText().toString();
-        UserAuthenticator.shared.registerUserAccount(name, email, password);
+        UserAccountType userAccountType
+                = (UserAccountType) userAccountTypeSpinner.getSelectedItem();
+        UserAuthenticator.shared.registerUserAccount(name, email, password, userAccountType);
         Intent intent = new Intent(this, CharitiesActivity.class);
         startActivity(intent);
     }

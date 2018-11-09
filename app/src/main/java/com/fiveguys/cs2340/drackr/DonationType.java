@@ -47,7 +47,7 @@ public enum DonationType {
             case "OTHER":
                 return OTHER;
             default:
-                return OTHER;
+                throw new RuntimeException("Invalid string passed to donationType");
         }
     }
 
