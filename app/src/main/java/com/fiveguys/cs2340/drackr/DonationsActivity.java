@@ -30,6 +30,10 @@ public class DonationsActivity extends AppCompatActivity implements ListSelectio
         int id = item.getItemId();
 
         if (id == R.id.addDonationButton) {
+            if (UserAuthenticator.shared.getSignedInUserAccount().getType()
+                    == UserAccountType.USER) {
+                return super.onOptionsItemSelected(item);
+            }
             Intent intent = new Intent(DonationsActivity.this, AddDonationActivity.class);
             startActivity(intent);
         }
