@@ -74,7 +74,7 @@ class CharityDataProvider {
                         (String) charityTreeMap.get("city"),
                         (String) charityTreeMap.get("state"),
                         ((Double) charityTreeMap.get("zip")).intValue(),
-                        CharityType.charityType((String) charityTreeMap.get("type")),
+                        CharityType.charityType((String) charityTreeMap.get("type"), false),
                         (String) charityTreeMap.get("phoneNumber"),
                         (String) charityTreeMap.get("url"),
                         donations
@@ -97,7 +97,7 @@ class CharityDataProvider {
         for (Object charityDataObject : charityDataObjects) {
             String[] charityData = (String[]) charityDataObject;
 
-            CharityType type = CharityType.charityType(charityData[8]);
+            CharityType type = CharityType.charityType(charityData[8], true);
 
             Charity charity = new Charity(charityData[0],
                     charityData[1],

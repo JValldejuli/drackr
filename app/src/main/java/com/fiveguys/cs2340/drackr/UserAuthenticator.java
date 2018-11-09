@@ -39,10 +39,13 @@ class UserAuthenticator {
             Iterable<LinkedTreeMap> linkedTreeMapList
                     = gson.fromJson(accountsJSON, ArrayList.class);
             for (LinkedTreeMap accountTreeMap : linkedTreeMapList) {
+                String userAccountTypeString = (String) accountTreeMap.get("type");
+                UserAccountType userAccountType = UserAccountType.userAccountType(userAccountTypeString);
                 UserAccount account = new UserAccount(
                         (String) accountTreeMap.get("name"),
                         (String) accountTreeMap.get("email"),
-                        (String) accountTreeMap.get("password")
+                        (String) accountTreeMap.get("password"),
+                        userAccountType
                 );
                 accounts.add(account);
             }
@@ -65,14 +68,14 @@ class UserAuthenticator {
 
     }
 
-    public void registerUserAccount(String name, String email, String password) {
+    public void registerUserAccount(String name, String email, String password, UserAccountType type) {
         boolean validName = (name != null) && !name.isEmpty();
         boolean validEmail = (email != null) && !email.isEmpty();
         boolean validPassword = (password != null) && !password.isEmpty();
         if (!validName || !validEmail || !validPassword) {
             return;
         }
-        UserAccount newAccount = new UserAccount(name, email, password);
+        UserAccount newAccount = new UserAccount(name, email, password, type);
         accounts.add(newAccount);
         signedInUserAccount = newAccount;
         save();

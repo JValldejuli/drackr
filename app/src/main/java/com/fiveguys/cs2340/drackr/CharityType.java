@@ -34,16 +34,29 @@ public enum CharityType {
      * @param string The string to convert.
      * @return The CharityType.
      */
-    public static CharityType charityType(String string) {
-        switch (string) {
-            case "Drop Off":
-                return DROP_OFF;
-            case "Store":
-                return STORE;
-            case "Warehouse":
-                return WAREHOUSE;
-            default:
-                return WAREHOUSE;
+    public static CharityType charityType(String string, boolean csv) {
+        if (csv) {
+            switch (string) {
+                case "Drop Off":
+                    return DROP_OFF;
+                case "Store":
+                    return STORE;
+                case "Warehouse":
+                    return WAREHOUSE;
+                default:
+                    throw new RuntimeException("Invalid string passed to charityType - CSV");
+            }
+        } else {
+            switch (string) {
+                case "DROP_OFF":
+                    return DROP_OFF;
+                case "STORE":
+                    return STORE;
+                case "WAREHOUSE":
+                    return WAREHOUSE;
+                default:
+                    throw new RuntimeException("Invalid string passed to charityType - NOT CSV");
+            }
         }
     }
 
