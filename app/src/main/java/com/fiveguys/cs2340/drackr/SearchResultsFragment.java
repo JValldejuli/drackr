@@ -30,7 +30,10 @@ public class SearchResultsFragment extends Fragment {
             RecyclerView recyclerView = (RecyclerView) view;
             recyclerView.setLayoutManager(new LinearLayoutManager(context));
             recyclerView.setAdapter(
-                    new BasicRecyclerViewAdapter(DonationSearchCoordinator.shared.getResults(), mListener)
+                    new BasicRecyclerViewAdapter(
+                            DonationSearchCoordinator.shared.getResults(),
+                            mListener
+                    )
             );
         }
         return view;

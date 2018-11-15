@@ -40,11 +40,11 @@ class CharityDataProvider {
         String charitiesJSON = preferences.getString("charities", "");
         if (!("[]".equals(charitiesJSON) || charitiesJSON.isEmpty())) {
             Iterable<LinkedTreeMap> linkedTreeMapList
-                    = gson.fromJson(charitiesJSON, ArrayList.class);
+                    = (Iterable<LinkedTreeMap>) gson.fromJson(charitiesJSON, ArrayList.class);
             for (LinkedTreeMap charityTreeMap : linkedTreeMapList) {
 
                 Iterable<LinkedTreeMap> linkedTreeMapDonationsList
-                        = (ArrayList<LinkedTreeMap>) charityTreeMap.get("donations");
+                        = (Iterable<LinkedTreeMap>) charityTreeMap.get("donations");
                 ArrayList<Donation> donations = new ArrayList<>();
 
                 for (LinkedTreeMap donationTreeMap : linkedTreeMapDonationsList) {

@@ -30,7 +30,10 @@ public class CharitiesFragment extends Fragment {
             RecyclerView recyclerView = (RecyclerView) view;
             recyclerView.setLayoutManager(new LinearLayoutManager(context));
             recyclerView.setAdapter(
-                    new BasicRecyclerViewAdapter(CharityDataProvider.shared.getCharities(), mListener)
+                    new BasicRecyclerViewAdapter(
+                            CharityDataProvider.shared.getCharities(),
+                            mListener
+                    )
             );
         }
         return view;

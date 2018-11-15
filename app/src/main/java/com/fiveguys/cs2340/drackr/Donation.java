@@ -16,6 +16,14 @@ public class Donation implements Parcelable {
     private double amount;
     private DonationType type;
 
+    /**
+     * Designated constructor for Donation.
+     * @param date The date of the donation.
+     * @param zipCode The zip code of the donation.
+     * @param description The description of the donation.
+     * @param amount The donation amount.
+     * @param type
+     */
     public Donation(Date date, String zipCode, String description,
                     double amount, DonationType type) {
         this.date = date;
@@ -82,40 +90,20 @@ public class Donation implements Parcelable {
         return date;
     }
 
-    public void setDate(Date date) {
-        this.date = date;
-    }
-
     public String getZipCode() {
         return zipCode;
-    }
-
-    public void setZipCode(String zipCode) {
-        this.zipCode = zipCode;
     }
 
     public String getDescription() {
         return description;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
     public double getAmount() {
         return amount;
     }
 
-    public void setAmount(double amount) {
-        this.amount = amount;
-    }
-
     public DonationType getType() {
         return type;
-    }
-
-    public void setType(DonationType type) {
-        this.type = type;
     }
 
     private static final int SHORT_DESCRIPTION_LENGTH = 40;

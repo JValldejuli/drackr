@@ -32,14 +32,37 @@ public class Charity implements Parcelable {
         return name;
     }
 
+    /**
+     * Gets this charities donations.
+     * @return The charities donations.
+     */
     public List<Donation> getDonations() {
         return Collections.unmodifiableList(donations);
     }
 
+    /**
+     * Adds a donation to the charities donations.
+     * @param donation The donation to add.
+     */
     public void addDonation(Donation donation) {
         donations.add(donation);
     }
 
+    /**
+     * The designated constructor for Charity.
+     * @param key ID of the charity
+     * @param name Name of the charity
+     * @param latitude Latitude of the charity
+     * @param longitude Longitude of the charity
+     * @param streetAddress Street address of the charity
+     * @param city City of the charity
+     * @param state State of the charity
+     * @param zip Zip of the charity
+     * @param type Type of the charity
+     * @param phoneNumber Phone number of the charity
+     * @param url URL of the charity
+     * @param donations Donations to the charity
+     */
     public Charity(String key, String name, double latitude, double longitude, String streetAddress,
                    String city, String state, int zip, CharityType type, String phoneNumber,
                    String url, List<Donation> donations) {
@@ -89,6 +112,10 @@ public class Charity implements Parcelable {
         dest.writeTypedList(donations);
     }
 
+    /**
+     * Constructs a multiline, full description of the charity.
+     * @return The full description.
+     */
     public CharSequence getFullDescription() {
         CharityType type = getType();
         String typeAsString = type.description();
@@ -115,12 +142,20 @@ public class Charity implements Parcelable {
                 + getUrl().toString();
     }
 
+    /**
+     * A short description for the map marker.
+     * @return A short description for the map marker.
+     */
     public String getMapMarkerDescription() {
         return getName()
                 + "\n"
                 + getPhoneNumber();
     }
 
+    /**
+     * Gets the coordinates of the Charity as a LatLng object.
+     * @return The coordinates of the Charity as a LatLng object.
+     */
     public LatLng getCoordinates() {
         return new LatLng(getLatitude(), getLongitude());
     }
@@ -142,92 +177,92 @@ public class Charity implements Parcelable {
         }
     };
 
+    /**
+     * Get charity key/ID.
+     * @return Charity key/ID.
+     */
     private String getKey() {
         return key;
     }
 
-    public void setKey(String key) {
-        this.key = key;
-    }
-
+    /**
+     * Get charity name.
+     * @return Charity name.
+     */
     public String getName() {
         return name;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
+    /**
+     * Get charity latitude.
+     * @return Charity latitude.
+     */
     public double getLatitude() {
         return latitude;
     }
 
-    public void setLatitude(double latitude) {
-        this.latitude = latitude;
-    }
-
+    /**
+     * Get charity longitude.
+     * @return Charity longitude.
+     */
     public double getLongitude() {
         return longitude;
     }
 
-    public void setLongitude(double longitude) {
-        this.longitude = longitude;
-    }
-
+    /**
+     * Get charity street address.
+     * @return Charity street address.
+     */
     private String getStreetAddress() {
         return streetAddress;
     }
 
-    public void setStreetAddress(String streetAddress) {
-        this.streetAddress = streetAddress;
-    }
-
+    /**
+     * Get charity city.
+     * @return Charity city.
+     */
     private String getCity() {
         return city;
     }
 
-    public void setCity(String city) {
-        this.city = city;
-    }
-
+    /**
+     * Get charity state.
+     * @return Charity state.
+     */
     private String getState() {
         return state;
     }
 
-    public void setState(String state) {
-        this.state = state;
-    }
-
+    /**
+     * Get charity zip.
+     * @return Charity zip.
+     */
     private int getZip() {
         return zip;
     }
 
-    public void setZip(int zip) {
-        this.zip = zip;
-    }
-
+    /**
+     * Get charity type.
+     * @return Charity type.
+     */
     private CharityType getType() {
         return type;
     }
 
-    public void setType(CharityType type) {
-        this.type = type;
-    }
-
+    /**
+     * Get charity phone number.
+     * @return Charity phone number.
+     */
     public String getPhoneNumber() {
         return phoneNumber;
     }
 
-    public void setPhoneNumber(String phoneNumber) {
-        this.phoneNumber = phoneNumber;
-    }
-
+    /**
+     * Get charity url.
+     * @return Charity url.
+     */
     private CharSequence getUrl() {
         return url;
-    }
-
-    public void setUrl(String url) {
-        this.url = url;
     }
 
 }

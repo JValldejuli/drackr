@@ -32,6 +32,7 @@ public enum CharityType {
     /**
      * Used to convert a string to a CharityType.
      * @param string The string to convert.
+     * @param csv Whether or not the incoming string is from the provided CSV.
      * @return The CharityType.
      */
     public static CharityType charityType(String string, boolean csv) {
